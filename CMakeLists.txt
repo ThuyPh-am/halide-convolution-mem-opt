@@ -15,19 +15,28 @@ add_library(conv_base STATIC src/generator/convolution_base.cpp)
 target_link_libraries(conv_base PUBLIC Halide::Halide)
 target_include_directories(conv_base PUBLIC src/generator)
 
+add_library(data_generator STATIC src/runner/data_generator.cpp)
+target_include_directories(data_generator PUBLIC src/runner)
+
 add_library(perf_wrapper STATIC src/runner/perf_wrapper.cpp)
 target_include_directories(perf_wrapper PUBLIC src/runner)
 
 add_library(csv_writer STATIC src/utils/csv_writer.cpp)
 target_include_directories(csv_writer PUBLIC src/utils)
 # executables
-add_executable(test_convolution  src/generator/test_convolution.cpp)
-add_executable(schedule_baseline src/generator/schedule_baseline.cpp)
-add_executable(schedule_rs       src/generator/schedule_rs_inspired.cpp)
-add_executable(schedule_ws       src/generator/schedule_ws_inspired.cpp)
-add_executable(schedule_os       src/generator/schedule_os_inspired.cpp)
+add_executable(run_experiment
+    src/runner/main.cpp
+    src/generator/schedule_baseline.cpp
+    src/generator/schedule_rs_inspired.cpp
+    src/generator/schedule_ws_inspired.cpp
+    src/generator/schedule_os_inspired.cpp
+)
 
-# Link Halide to all targets
-foreach(target test_convolution schedule_baseline schedule_rs schedule_ws schedule_os)
-    target_link_libraries(${target} conv_base perf_wrapper csv_writer)
-endforeach()
+target_link_libraries(run_experiment
+    PRIVATE
+        conv_base
+        data_generator
+        perf_wrapper
+        csv_writer
+)
+ 

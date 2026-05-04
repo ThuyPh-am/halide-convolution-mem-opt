@@ -11,7 +11,7 @@
 
 using namespace Halide;
 
-std::string output_path = "../results/raw/raw_results.csv";
+inline const std::string output_path = "../results/raw/raw_results.csv";
 
 void measure_layer_os(const Convo& layer,
                     const std::string& model){

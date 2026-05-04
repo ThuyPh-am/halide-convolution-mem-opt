@@ -20,7 +20,7 @@ using namespace Halide;
     // sweep the input row spatially (kW), then advance to the next filter row
 // 3. Output tiles are vectorised over W_out to exploit SIMD and keep prtial
     // sum in registers during the ineermost loop
-std::string output_path = "../results/raw/raw_results.csv";
+inline const std::string output_path = "../results/raw/raw_results.csv";
 
 // tile size------------------------------------------
 // Choosen to fit a tile of (H_tile output rows) x (W_out) partial sums plus
@@ -45,7 +45,6 @@ void measure_layer_rs(const Convo& layer,
     Var H_out_outer("H_out_outer"), H_out_inner("H_out_inner");
     Var C_out_outer("C_out_outer"), C_out_inner("C_out_inner");
 
-    rs_results.convolution.compute_root();
 
     // ??????????????????????????----------------------
     // is the init stage schedule neccesarry?
@@ -81,6 +80,8 @@ void measure_layer_rs(const Convo& layer,
                     H_out_outer, C_out_outer)
                 .vectorize(rs_results.W_out,8)
                 .parallel(C_out_outer);
+
+    rs_results.convolution.compute_root();
 
     PerfResult rs_res = measure_convolution([&](){
         rs_results.convolution.realize(output);

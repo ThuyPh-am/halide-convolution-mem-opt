@@ -14,7 +14,7 @@
 static long perf_event_open(struct perf_event_attr *hw_event, pid_t pid, int cpu,
                             int group_fd, unsigned long flags){
     int fd = syscall(SYS_perf_event_open, hw_event, pid, cpu, group_fd, flags);
-    if (fd = -1){
+    if (fd == -1){
         std::cerr << "Error creating event"<< std::endl;
         // exit(EXIT_FAILURE); 
         // modify to use mock case 
@@ -44,7 +44,7 @@ PerfResult measure_convolution(std::function<void()>conv_fn){
     // mock case
     if (fd == -2){
         conv_fn();
-        measure.llc_misses == -1 ;
+        measure.llc_misses = -1 ;
         return measure;
     }
     // start counter
