@@ -1,0 +1,40 @@
+# Build directories
+build/
+CMakeFiles/
+cmake_install.cmake
+CMakeCache.txt
+
+# Object files
+*.o
+*.a
+*.so
+*.dylib
+
+# Executables
+*.out
+convolution_base
+schedule_baseline
+schedule_os
+schedule_rs
+schedule_ws
+test_convolution
+perf_wrapper
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.pytest_cache/
+
+# OS files
+.DS_Store
+Thumbs.db
