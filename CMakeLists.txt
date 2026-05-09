@@ -16,6 +16,7 @@ target_link_libraries(conv_base PUBLIC Halide::Halide)
 target_include_directories(conv_base PUBLIC src/generator)
 
 add_library(data_generator STATIC src/runner/data_generator.cpp)
+target_link_libraries(data_generator PUBLIC Halide::Halide)
 target_include_directories(data_generator PUBLIC src/runner)
 
 add_library(perf_wrapper STATIC src/runner/perf_wrapper.cpp)
