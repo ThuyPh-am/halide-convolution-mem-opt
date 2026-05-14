@@ -7,7 +7,7 @@ set(CMAKE_CXX_STANDARD 17)
 set(HALIDE_ROOT $ENV{HALIDE_ROOT})
 find_package(Halide REQUIRED HINTS ${HALIDE_ROOT}/lib/cmake/Halide)
 
-# Include your config headers
+# Include config headers
 include_directories(${CMAKE_SOURCE_DIR}/src/config)
 
 # shared library — Halide::Halide is PUBLIC so all executables inherit it
@@ -24,6 +24,7 @@ target_include_directories(perf_wrapper PUBLIC src/runner)
 
 add_library(csv_writer STATIC src/utils/csv_writer.cpp)
 target_include_directories(csv_writer PUBLIC src/utils)
+
 # executables
 add_executable(run_experiment
     src/runner/main.cpp
@@ -40,4 +41,7 @@ target_link_libraries(run_experiment
         perf_wrapper
         csv_writer
 )
- 
+
+#  sanity check
+add_executable(test_convolution src/generator/test_convolution.cpp)
+target_link_libraries(test_convolution PRIVATE conv_base)

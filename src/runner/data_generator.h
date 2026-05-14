@@ -9,5 +9,4 @@
 using namespace Halide;
 
 float random_generator();
-Buffer<float> calculate_output(const Convo& layer);
 std::pair<Buffer<float>, Buffer<float>> data_generating(const Convo& layer);

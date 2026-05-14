@@ -12,13 +12,6 @@ float random_generator()
     return (float)rand() / RAND_MAX;
 }
 
-Buffer<float> calculate_output(const Convo& layer)
-{
-    int W_out = out_dim(layer.W_in, layer.pad, layer.K_w, layer.stride);
-    int H_out = out_dim(layer.H_in, layer.pad, layer.K_h, layer.stride);
-    return Buffer<float> (W_out, H_out, layer.C_out);
-}
-
 std::pair<Buffer<float>, Buffer<float>> data_generating(const Convo& layer){   
     srand(time(NULL)); 
 

@@ -12,51 +12,51 @@
 
 using namespace Halide;
 
-// approximation of RS on CPU:
-// 1. A tile of output rows stays in L1/L2 while i iterate over
-    // every filter row and every input channel that feeds it -> input-row reuse
-// 2. The reduction is ordered r[2] (C_in) -> r[1] (kH) -> r[0] [kW]
-    // so the innermost access pattern matches RS: for a fixed filter row,
-    // sweep the input row spatially (kW), then advance to the next filter row
-// 3. Output tiles are vectorised over W_out to exploit SIMD and keep prtial
-    // sum in registers during the ineermost loop
-inline const std::string output_path = "../results/raw/raw_results.csv";
+static const std::string output_path = "../results/raw/raw_results.csv";
 
 // tile size------------------------------------------
 // Choosen to fit a tile of (H_tile output rows) x (W_out) partial sums plus
 // the corresponding input row into L2 (~512 KB on Cortex~A76)
-// Adjust if profilling shows thrashing
 static constexpr int H_TILE = 4; // output rows per file 
 static constexpr int C_OUT_TILE = 16; // output channels per tile (filter reuse)
 
 void measure_layer_rs(const Convo& layer,
                         const std::string& model){
 
-    Buffer<float> output = calculate_output(layer);
     auto [in_buff, weights_buff] = data_generating(layer);
 
     auto rs_results = convo_base(layer.stride, layer.pad);
     rs_results.input.set(in_buff);
     rs_results.weights.set(weights_buff);
 
-    int tile_H = std::min (H_TILE, layer.H_out);
-    int tile_C = std::min(C_OUT_TILE, layer.C_out);
+    const int W_out_ext = layer.W_out;
+    const int H_out_ext = layer.H_out;
+    const int C_out_ext = layer.C_out;
+    const int tile_H = std::min (H_TILE, H_out_ext); 
+    const int tile_C = std::min(C_OUT_TILE, C_out_ext); 
+    const int vec = std::min(8, W_out_ext);
 
-    Var H_out_outer("H_out_outer"), H_out_inner("H_out_inner");
-    Var C_out_outer("C_out_outer"), C_out_inner("C_out_inner");
+    rs_results.convolution.compute_root();
+
+    // Var H_out_outer("H_out_outer"), H_out_inner("H_out_inner");
+    // Var C_out_outer("C_out_outer"), C_out_inner("C_out_inner");
 
 
     // ??????????????????????????----------------------
     // is the init stage schedule neccesarry?
     // ------------------------------------------------
-    rs_results.convolution
-        .tile(rs_results.H_out, rs_results.C_out,
-              H_out_outer, H_out_inner,
-              C_out_outer, C_out_inner, tile_H, tile_C)
-        .reorder(rs_results.W_out, H_out_inner, C_out_inner,
-                 H_out_outer, C_out_outer)
-        .vectorize(rs_results.W_out, 8)
-        .parallel(C_out_outer);
+    // rs_results.convolution
+    //     .bound(rs_results.W_out, 0, W_out)
+    //     .bound(rs_results.H_out, 0, H_out)
+    //     .bound(rs_results.C_out, 0, C_out_ext)
+    //     .tile(rs_results.H_out, rs_results.C_out,
+    //           H_out_outer, H_out_inner,
+    //           C_out_outer, C_out_inner, tile_H, tile_C,
+    //         TailStrategy::GuardWithIf)
+    //     .reorder(rs_results.W_out, H_out_inner, C_out_inner,
+    //              H_out_outer, C_out_outer)
+    //     .vectorize(rs_results.W_out, 8)
+    //     .parallel(C_out_outer);
 
     // Update reduction schedule-----------------------------------------
     // Originally RDom r is ordered (r[0] = kW, r[1] = kH, r[2] = C_in)
@@ -70,19 +70,24 @@ void measure_layer_rs(const Convo& layer,
     //      is accessed sequentially -> spatial locality
     //  * Partial sum (C_inner, H_inner, W_out) stay hot in L1 while the reduction sweeps all C_in and all filter rows
 
+    // update stage: must split its own vars independently
+    Var H_out_outer_u("H_out_outer_u"), H_out_inner_u("H_out_inner_u");
+    Var C_out_outer_u("C_out_outer_u"), C_out_inner_u("C_out_inner_u");
+
     rs_results.convolution.update()
+                .split(rs_results.H_out, H_out_outer_u, H_out_inner_u, tile_H, TailStrategy::GuardWithIf)
+                .split(rs_results.C_out, C_out_outer_u, C_out_inner_u, tile_C, TailStrategy::GuardWithIf)
                 .reorder(rs_results.W_out, 
-                    H_out_inner, 
-                    C_out_inner,
-                    rs_results.r[0],
-                    rs_results.r[1],
-                    rs_results.r[2],
-                    H_out_outer, C_out_outer)
-                .vectorize(rs_results.W_out,8)
-                .parallel(C_out_outer);
+                    H_out_inner_u, 
+                    C_out_inner_u,
+                    rs_results.r[0], //kW
+                    rs_results.r[1], //kH
+                    rs_results.r[2], //C_in
+                    H_out_outer_u, C_out_outer_u)
+                .vectorize(rs_results.W_out, vec, TailStrategy::GuardWithIf)
+                .parallel(C_out_outer_u);
 
-    rs_results.convolution.compute_root();
-
+    Buffer<float> output(W_out_ext, H_out_ext, C_out_ext);
     PerfResult rs_res = measure_convolution([&](){
         rs_results.convolution.realize(output);
     });

@@ -10,14 +10,13 @@
 
 using namespace Halide;
 
-inline const std::string output_path = "../results/raw/raw_results.csv";
+static const std::string output_path = "../results/raw/raw_results.csv";
 
 void measure_layer_ws(const Convo &layer,
                     const std::string &model)
 {
 
     // prep input, weights and pipeline set up
-    Buffer<float> output = calculate_output(layer);
     auto [in_buff, weights_buff] = data_generating(layer);
 
     auto ws_result = convo_base(layer.stride, layer.pad); // auto = {convolution, input, weights}
@@ -30,10 +29,11 @@ void measure_layer_ws(const Convo &layer,
                             ws_result.r[0], ws_result.r[1], ws_result.C_out);
 
     ws_result.convolution.compute_root();
+
     // counting and realize
-    PerfResult r = measure_convolution([&](){
-        ws_result.convolution.realize(output);
-    });
+    Buffer<float> output(layer.W_out, layer.H_out, layer.C_out);
+    PerfResult r = measure_convolution([&]()
+                                       { ws_result.convolution.realize(output); });
 
     // writing csv
     r.model_name = model;

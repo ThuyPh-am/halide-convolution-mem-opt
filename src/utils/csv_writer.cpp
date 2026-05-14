@@ -4,6 +4,13 @@
 #include <iostream>
 #include <filesystem>
 
+static std::string current_timestamp(){
+    auto now = std::chrono::system_clock::now();
+    std::time_t t = std::chrono::system_clock::to_time_t(now);
+    std::ostringstream oss;
+    oss << std::put_time(std::localtime(&t), "%Y-%m-%dT%H:%M:%S");
+    return oss.str();
+}
 
 void write_csv(const std::string& output_path, const PerfResult& layer_result){
     std::ofstream file;
@@ -23,10 +30,12 @@ void write_csv(const std::string& output_path, const PerfResult& layer_result){
         file << "model,layer,schedule,llc_misses\n";
     }
 
-    file << layer_result.model_name << ","
+    file << current_timestamp() << "," 
+        <<layer_result.model_name << ","
         <<layer_result.layer_name << ","
         <<layer_result.schedule_name << ","
-        <<layer_result.llc_misses << "\n";
+        <<layer_result.llc_accesses <<"," 
+        <<layer_result.llc_misses<<"\n";
 
     file.close();
 };
