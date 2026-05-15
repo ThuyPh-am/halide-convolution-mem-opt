@@ -11,6 +11,8 @@
 
 using namespace Halide;
 
+static constexpr bool INSPECT = true; 
+
 static const std::string output_path = "../results/raw/raw_results.csv";
 
 static constexpr int H_TILE = 8;      // output rows per file
@@ -60,7 +62,16 @@ void measure_layer_os(const Convo& layer,
         .reorder(os_result.r[0], os_result.r[1], os_result.r[2],
                  W_out_inner, H_out_inner, W_out_outer, H_out_outer,
                  os_result.C_out)
+        .fuse(W_out_outer, H_out_outer, tile_index)
+        .parallel(tile_index)
         .vectorize(W_out_inner);
+
+    if (INSPECT)
+    {
+        std::cout << "\n======OS loop nest for [" << layer.name << "]====\n";
+        os_result.convolution.print_loop_nest();
+        std::cout << "======= end ======= \n\n";
+    }
 
     // run counter
     Buffer<float> output(W_out_ext, H_out_ext, C_out_ext);

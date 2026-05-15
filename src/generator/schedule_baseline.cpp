@@ -26,6 +26,8 @@
 
 using namespace Halide;
 
+static constexpr bool INSPECT = true;
+
 static const std::string output_path = "../results/raw/raw_results.csv";
 
 void measure_layer_baseline(const Convo& layer,
@@ -41,6 +43,12 @@ void measure_layer_baseline(const Convo& layer,
 
     result.convolution.compute_root();
     // start counter only before realize
+    if (INSPECT)
+    {
+        std::cout << "\n======Baseline loop nest for [" << layer.name << "]====\n";
+        result.convolution.print_loop_nest();
+        std::cout << "======= end ======= \n\n";
+    }
     Buffer<float> output(layer.W_out, layer.H_out, layer.C_out);
     PerfResult r = measure_convolution([&](){
         result.convolution.realize(output);

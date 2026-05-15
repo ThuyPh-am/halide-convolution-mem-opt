@@ -12,6 +12,7 @@
 
 using namespace Halide;
 
+static constexpr bool INSPECT = true;
 static const std::string output_path = "../results/raw/raw_results.csv";
 
 // tile size------------------------------------------
@@ -25,9 +26,9 @@ void measure_layer_rs(const Convo& layer,
 
     auto [in_buff, weights_buff] = data_generating(layer);
 
-    auto rs_results = convo_base(layer.stride, layer.pad);
-    rs_results.input.set(in_buff);
-    rs_results.weights.set(weights_buff);
+    auto rs_result = convo_base(layer.stride, layer.pad);
+    rs_result.input.set(in_buff);
+    rs_result.weights.set(weights_buff);
 
     const int W_out_ext = layer.W_out;
     const int H_out_ext = layer.H_out;
@@ -36,7 +37,7 @@ void measure_layer_rs(const Convo& layer,
     const int tile_C = std::min(C_OUT_TILE, C_out_ext); 
     const int vec = std::min(8, W_out_ext);
 
-    rs_results.convolution.compute_root();
+    rs_result.convolution.compute_root();
 
     // Var H_out_outer("H_out_outer"), H_out_inner("H_out_inner");
     // Var C_out_outer("C_out_outer"), C_out_inner("C_out_inner");
@@ -45,17 +46,17 @@ void measure_layer_rs(const Convo& layer,
     // ??????????????????????????----------------------
     // is the init stage schedule neccesarry?
     // ------------------------------------------------
-    // rs_results.convolution
-    //     .bound(rs_results.W_out, 0, W_out)
-    //     .bound(rs_results.H_out, 0, H_out)
-    //     .bound(rs_results.C_out, 0, C_out_ext)
-    //     .tile(rs_results.H_out, rs_results.C_out,
+    // rs_result.convolution
+    //     .bound(rs_result.W_out, 0, W_out)
+    //     .bound(rs_result.H_out, 0, H_out)
+    //     .bound(rs_result.C_out, 0, C_out_ext)
+    //     .tile(rs_result.H_out, rs_result.C_out,
     //           H_out_outer, H_out_inner,
     //           C_out_outer, C_out_inner, tile_H, tile_C,
     //         TailStrategy::GuardWithIf)
-    //     .reorder(rs_results.W_out, H_out_inner, C_out_inner,
+    //     .reorder(rs_result.W_out, H_out_inner, C_out_inner,
     //              H_out_outer, C_out_outer)
-    //     .vectorize(rs_results.W_out, 8)
+    //     .vectorize(rs_result.W_out, 8)
     //     .parallel(C_out_outer);
 
     // Update reduction schedule-----------------------------------------
@@ -74,22 +75,28 @@ void measure_layer_rs(const Convo& layer,
     Var H_out_outer_u("H_out_outer_u"), H_out_inner_u("H_out_inner_u");
     Var C_out_outer_u("C_out_outer_u"), C_out_inner_u("C_out_inner_u");
 
-    rs_results.convolution.update()
-                .split(rs_results.H_out, H_out_outer_u, H_out_inner_u, tile_H, TailStrategy::GuardWithIf)
-                .split(rs_results.C_out, C_out_outer_u, C_out_inner_u, tile_C, TailStrategy::GuardWithIf)
-                .reorder(rs_results.W_out, 
-                    H_out_inner_u, 
-                    C_out_inner_u,
-                    rs_results.r[0], //kW
-                    rs_results.r[1], //kH
-                    rs_results.r[2], //C_in
-                    H_out_outer_u, C_out_outer_u)
-                .vectorize(rs_results.W_out, vec, TailStrategy::GuardWithIf)
-                .parallel(C_out_outer_u);
+    rs_result.convolution.update()
+        .split(rs_result.H_out, H_out_outer_u, H_out_inner_u, tile_H, TailStrategy::GuardWithIf)
+        .split(rs_result.C_out, C_out_outer_u, C_out_inner_u, tile_C, TailStrategy::GuardWithIf)
+        .reorder(rs_result.W_out,
+                rs_result.r[0], // kW
+                rs_result.r[1], // kH
+                rs_result.r[2], // C_in
+                H_out_inner_u,
+                C_out_inner_u,
+                H_out_outer_u, C_out_outer_u)
+        .vectorize(rs_result.W_out, vec, TailStrategy::GuardWithIf)
+        .parallel(C_out_outer_u);
+
+    if (INSPECT){
+        std::cout << "\n======RS loop nest for [" << layer.name << "]====\n";
+       rs_result.convolution.print_loop_nest();
+       std::cout << "======= end ======= \n\n";
+    }
 
     Buffer<float> output(W_out_ext, H_out_ext, C_out_ext);
     PerfResult rs_res = measure_convolution([&](){
-        rs_results.convolution.realize(output);
+        rs_result.convolution.realize(output);
     });
 
     rs_res.schedule_name = "Row-stationary inspired";

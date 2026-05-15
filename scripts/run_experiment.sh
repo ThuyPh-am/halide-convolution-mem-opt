@@ -7,4 +7,4 @@ if [ $? -ne 0 ]; then
     echo "Build failed"
     exit 1
 fi
-./run_experiment
+./run_experiment > loop_nest.txt 2>&1
