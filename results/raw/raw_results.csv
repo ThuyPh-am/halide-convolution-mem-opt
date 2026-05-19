@@ -1,240 +1,57 @@
-model,layer,schedule,llc_accesses,llc_misses
-AlexNet,Alex_conv1,baseline,6735572
-AlexNet,Alex_conv1,Row-stationary inspired,4274344
-AlexNet,Alex_conv1,weight_stationary_inspired,1959467
-AlexNet,Alex_conv1,baseline,6557837
-AlexNet,Alex_conv1,Row-stationary inspired,4507345
-AlexNet,Alex_conv1,weight_stationary_inspired,1885964
-AlexNet,Alex_conv1,baseline,5749791
-AlexNet,Alex_conv1,Row-stationary inspired,4494426
-AlexNet,Alex_conv1,weight_stationary_inspired,2251870
-AlexNet,Alex_conv1,baseline,5660505
-AlexNet,Alex_conv1,Row-stationary inspired,4195811
-AlexNet,Alex_conv1,weight_stationary_inspired,1830120
-AlexNet,Alex_conv1,baseline,6786542
-AlexNet,Alex_conv1,Row-stationary inspired,4609555
-AlexNet,Alex_conv1,weight_stationary_inspired,1771374
-AlexNet,Alex_conv1,baseline,6661835
-AlexNet,Alex_conv1,Row-stationary inspired,4265959
-AlexNet,Alex_conv1,weight_stationary_inspired,1961665
-AlexNet,Alex_conv1,output_stationary_inspired,3069328
-AlexNet,Alex_conv2,baseline,1808771
-AlexNet,Alex_conv2,Row-stationary inspired,4274509
-AlexNet,Alex_conv2,weight_stationary_inspired,1728158
-AlexNet,Alex_conv2,output_stationary_inspired,2760221
-AlexNet,Alex_conv3,baseline,1656952
-AlexNet,Alex_conv3,Row-stationary inspired,4087004
-AlexNet,Alex_conv3,weight_stationary_inspired,1814202
-AlexNet,Alex_conv3,output_stationary_inspired,2303826
-AlexNet,Alex_conv4,baseline,1688279
-AlexNet,Alex_conv4,Row-stationary inspired,4362085
-AlexNet,Alex_conv4,weight_stationary_inspired,1747205
-AlexNet,Alex_conv4,output_stationary_inspired,2291085
-AlexNet,Alex_conv5,baseline,1513949
-AlexNet,Alex_conv5,Row-stationary inspired,4350437
-AlexNet,Alex_conv5,weight_stationary_inspired,1648155
-AlexNet,Alex_conv5,output_stationary_inspired,2405560
-VGG16,VGG_conv1_1,baseline,1829477
-VGG16,VGG_conv1_1,Row-stationary inspired,4245851
-VGG16,VGG_conv1_1,weight_stationary_inspired,3367679
-VGG16,VGG_conv1_1,output_stationary_inspired,2354577
-VGG16,VGG_conv1_2,baseline,19059254
-VGG16,VGG_conv1_2,Row-stationary inspired,4316844
-VGG16,VGG_conv1_2,weight_stationary_inspired,111464041
-VGG16,VGG_conv1_2,output_stationary_inspired,17256415
-VGG16,VGG_conv2_1,baseline,5702567
-VGG16,VGG_conv2_1,Row-stationary inspired,4183826
-VGG16,VGG_conv2_1,weight_stationary_inspired,34938760
-VGG16,VGG_conv2_1,output_stationary_inspired,5526279
-VGG16,VGG_conv3_1,baseline,1984278
-VGG16,VGG_conv3_1,Row-stationary inspired,4217231
-VGG16,VGG_conv3_1,weight_stationary_inspired,11069296
-VGG16,VGG_conv3_1,output_stationary_inspired,2156074
-VGG16,VGG_conv4_1,baseline,1780701
-VGG16,VGG_conv4_1,Row-stationary inspired,4199133
-VGG16,VGG_conv4_1,weight_stationary_inspired,2115755
-VGG16,VGG_conv4_1,output_stationary_inspired,2886355
-MobileNet,Mobilenet_conv1,baseline,1882582
-MobileNet,Mobilenet_conv1,Row-stationary inspired,3988998
-MobileNet,Mobilenet_conv1,weight_stationary_inspired,2300418
-MobileNet,Mobilenet_conv1,output_stationary_inspired,2181951
-MobileNet,MobileNet_dw2,baseline,1833495
-MobileNet,MobileNet_dw2,Row-stationary inspired,4333876
-MobileNet,MobileNet_dw2,weight_stationary_inspired,3483480
-MobileNet,MobileNet_dw2,output_stationary_inspired,2159956
-MobileNet,MobileNet_pw2,baseline,1725423
-MobileNet,MobileNet_pw2,Row-stationary inspired,3994182
-MobileNet,MobileNet_pw2,weight_stationary_inspired,2925242
-MobileNet,MobileNet_pw2,output_stationary_inspired,2189698
-MobileNet,MobileNet_dw3,baseline,1555031
-MobileNet,MobileNet_dw3,Row-stationary inspired,4205621
-MobileNet,MobileNet_dw3,weight_stationary_inspired,2399820
-MobileNet,MobileNet_dw3,output_stationary_inspired,1947445
-2026-05-14T14:29:29,AlexNet,Alex_conv1,baseline,60821722,6248876
-2026-05-14T14:29:30,AlexNet,Alex_conv1,Row-stationary inspired,48388593,4361438
-2026-05-14T14:29:30,AlexNet,Alex_conv1,weight_stationary_inspired,42137871,1907147
-2026-05-14T14:29:31,AlexNet,Alex_conv1,output_stationary_inspired,33560778,2671096
-2026-05-14T14:29:32,AlexNet,Alex_conv2,baseline,16580416,1529816
-2026-05-14T14:29:33,AlexNet,Alex_conv2,Row-stationary inspired,47755324,3947171
-2026-05-14T14:29:33,AlexNet,Alex_conv2,weight_stationary_inspired,16203004,1581238
-2026-05-14T14:29:34,AlexNet,Alex_conv2,output_stationary_inspired,31563833,2560218
-2026-05-14T14:29:35,AlexNet,Alex_conv3,baseline,16571270,1553596
-2026-05-14T14:29:36,AlexNet,Alex_conv3,Row-stationary inspired,47559013,3994414
-2026-05-14T14:29:36,AlexNet,Alex_conv3,weight_stationary_inspired,16286143,1551748
-2026-05-14T14:29:37,AlexNet,Alex_conv3,output_stationary_inspired,25902273,2170513
-2026-05-14T14:29:38,AlexNet,Alex_conv4,baseline,16592919,1520010
-2026-05-14T14:29:39,AlexNet,Alex_conv4,Row-stationary inspired,47236536,3873328
-2026-05-14T14:29:39,AlexNet,Alex_conv4,weight_stationary_inspired,16377637,1520086
-2026-05-14T14:29:40,AlexNet,Alex_conv4,output_stationary_inspired,25738355,2189391
-2026-05-14T14:29:40,AlexNet,Alex_conv5,baseline,16426443,1638604
-2026-05-14T14:29:41,AlexNet,Alex_conv5,Row-stationary inspired,47233586,3860914
-2026-05-14T14:29:42,AlexNet,Alex_conv5,weight_stationary_inspired,16200316,1539572
-2026-05-14T14:29:43,AlexNet,Alex_conv5,output_stationary_inspired,25595956,2504900
-2026-05-14T14:29:43,VGG16,VGG_conv1_1,baseline,18056773,1721596
-2026-05-14T14:29:44,VGG16,VGG_conv1_1,Row-stationary inspired,47353336,3909064
-2026-05-14T14:29:44,VGG16,VGG_conv1_1,weight_stationary_inspired,26543058,2982162
-2026-05-14T14:29:45,VGG16,VGG_conv1_1,output_stationary_inspired,23578557,2384996
-2026-05-14T14:29:48,VGG16,VGG_conv1_2,baseline,485790995,18507482
-2026-05-14T14:29:49,VGG16,VGG_conv1_2,Row-stationary inspired,48199366,4101493
-2026-05-14T14:29:51,VGG16,VGG_conv1_2,weight_stationary_inspired,260250573,111510074
-2026-05-14T14:29:53,VGG16,VGG_conv1_2,output_stationary_inspired,159438719,17020309
-2026-05-14T14:29:54,VGG16,VGG_conv2_1,baseline,59617003,5706297
-2026-05-14T14:29:55,VGG16,VGG_conv2_1,Row-stationary inspired,47666996,3928719
-2026-05-14T14:29:57,VGG16,VGG_conv2_1,weight_stationary_inspired,109025197,35971131
-2026-05-14T14:29:58,VGG16,VGG_conv2_1,output_stationary_inspired,48719985,5550486
-2026-05-14T14:29:59,VGG16,VGG_conv3_1,baseline,41519831,1840472
-2026-05-14T14:30:00,VGG16,VGG_conv3_1,Row-stationary inspired,47848751,3889429
-2026-05-14T14:30:01,VGG16,VGG_conv3_1,weight_stationary_inspired,105727108,11540951
-2026-05-14T14:30:03,VGG16,VGG_conv3_1,output_stationary_inspired,54707612,2447766
-2026-05-14T14:30:04,VGG16,VGG_conv4_1,baseline,52290969,2023458
-2026-05-14T14:30:06,VGG16,VGG_conv4_1,Row-stationary inspired,47575339,4109594
-2026-05-14T14:30:07,VGG16,VGG_conv4_1,weight_stationary_inspired,89045256,2067642
-2026-05-14T14:30:09,VGG16,VGG_conv4_1,output_stationary_inspired,61024200,2684230
-2026-05-14T14:30:09,MobileNet,Mobilenet_conv1,baseline,17047098,1633694
-2026-05-14T14:30:10,MobileNet,Mobilenet_conv1,Row-stationary inspired,47422074,3912730
-2026-05-14T14:30:10,MobileNet,Mobilenet_conv1,weight_stationary_inspired,21457997,2253312
-2026-05-14T14:30:11,MobileNet,Mobilenet_conv1,output_stationary_inspired,22790748,2029963
-2026-05-14T14:30:11,MobileNet,MobileNet_dw2,baseline,18292128,1837128
-2026-05-14T14:30:12,MobileNet,MobileNet_dw2,Row-stationary inspired,47338239,3954135
-2026-05-14T14:30:13,MobileNet,MobileNet_dw2,weight_stationary_inspired,26816432,3448835
-2026-05-14T14:30:13,MobileNet,MobileNet_dw2,output_stationary_inspired,23885802,2015111
-2026-05-14T14:30:14,MobileNet,MobileNet_pw2,baseline,19427484,1595338
-2026-05-14T14:30:14,MobileNet,MobileNet_pw2,Row-stationary inspired,46530590,3766297
-2026-05-14T14:30:15,MobileNet,MobileNet_pw2,weight_stationary_inspired,17549474,2828872
-2026-05-14T14:30:15,MobileNet,MobileNet_pw2,output_stationary_inspired,25236062,2030213
-2026-05-14T14:30:16,MobileNet,MobileNet_dw3,baseline,17779055,1558329
-2026-05-14T14:30:17,MobileNet,MobileNet_dw3,Row-stationary inspired,47379072,3944173
-2026-05-14T14:30:17,MobileNet,MobileNet_dw3,weight_stationary_inspired,24093946,2361341
-2026-05-14T14:30:18,MobileNet,MobileNet_dw3,output_stationary_inspired,23552349,1929089
-2026-05-15T12:24:16,AlexNet,Alex_conv1,baseline,59855794,6297355
-2026-05-15T12:24:17,AlexNet,Alex_conv1,Row-stationary inspired,44599141,4000944
-2026-05-15T12:24:17,AlexNet,Alex_conv1,weight_stationary_inspired,31183951,1756673
-2026-05-15T12:24:18,AlexNet,Alex_conv1,output_stationary_inspired,33526231,2846886
-2026-05-15T12:24:19,AlexNet,Alex_conv2,baseline,16505982,1779620
-2026-05-15T12:24:20,AlexNet,Alex_conv2,Row-stationary inspired,42440958,3686267
-2026-05-15T12:24:20,AlexNet,Alex_conv2,weight_stationary_inspired,16222246,1581398
-2026-05-15T12:24:21,AlexNet,Alex_conv2,output_stationary_inspired,31458705,2750676
-2026-05-15T12:24:22,AlexNet,Alex_conv3,baseline,16532954,1702389
-2026-05-15T12:24:23,AlexNet,Alex_conv3,Row-stationary inspired,42642969,3693923
-2026-05-15T12:24:23,AlexNet,Alex_conv3,weight_stationary_inspired,16408306,1674239
-2026-05-15T12:24:24,AlexNet,Alex_conv3,output_stationary_inspired,25743115,2489022
-2026-05-15T12:24:25,AlexNet,Alex_conv4,baseline,16397812,1644067
-2026-05-15T12:24:26,AlexNet,Alex_conv4,Row-stationary inspired,42673579,3841174
-2026-05-15T12:24:26,AlexNet,Alex_conv4,weight_stationary_inspired,16117667,1648366
-2026-05-15T12:24:27,AlexNet,Alex_conv4,output_stationary_inspired,25532247,2281183
-2026-05-15T12:24:27,AlexNet,Alex_conv5,baseline,16476093,1680603
-2026-05-15T12:24:28,AlexNet,Alex_conv5,Row-stationary inspired,42649953,3627021
-2026-05-15T12:24:29,AlexNet,Alex_conv5,weight_stationary_inspired,16266980,1569116
-2026-05-15T12:24:29,AlexNet,Alex_conv5,output_stationary_inspired,25494115,2326317
-2026-05-15T12:24:30,VGG16,VGG_conv1_1,baseline,17967108,1784969
-2026-05-15T12:24:31,VGG16,VGG_conv1_1,Row-stationary inspired,43138473,3722580
-2026-05-15T12:24:31,VGG16,VGG_conv1_1,weight_stationary_inspired,26224052,3160691
-2026-05-15T12:24:31,VGG16,VGG_conv1_1,output_stationary_inspired,23625730,2232820
-2026-05-15T12:24:34,VGG16,VGG_conv1_2,baseline,442750024,18992284
-2026-05-15T12:24:36,VGG16,VGG_conv1_2,Row-stationary inspired,47048989,3862154
-2026-05-15T12:24:38,VGG16,VGG_conv1_2,weight_stationary_inspired,251740436,111802076
-2026-05-15T12:24:39,VGG16,VGG_conv1_2,output_stationary_inspired,160718903,17329494
-2026-05-15T12:24:41,VGG16,VGG_conv2_1,baseline,59970547,6313720
-2026-05-15T12:24:42,VGG16,VGG_conv2_1,Row-stationary inspired,43218416,3674643
-2026-05-15T12:24:43,VGG16,VGG_conv2_1,weight_stationary_inspired,109318253,36023564
-2026-05-15T12:24:44,VGG16,VGG_conv2_1,output_stationary_inspired,50343238,5953878
-2026-05-15T12:24:46,VGG16,VGG_conv3_1,baseline,39472705,1889184
-2026-05-15T12:24:47,VGG16,VGG_conv3_1,Row-stationary inspired,43361434,3796551
-2026-05-15T12:24:48,VGG16,VGG_conv3_1,weight_stationary_inspired,105989594,11688792
-2026-05-15T12:24:49,VGG16,VGG_conv3_1,output_stationary_inspired,53468156,2319147
-2026-05-15T12:24:51,VGG16,VGG_conv4_1,baseline,46556326,1781264
-2026-05-15T12:24:52,VGG16,VGG_conv4_1,Row-stationary inspired,42963981,3733712
-2026-05-15T12:24:53,VGG16,VGG_conv4_1,weight_stationary_inspired,90817832,2087217
-2026-05-15T12:24:55,VGG16,VGG_conv4_1,output_stationary_inspired,62128504,3057043
-2026-05-15T12:24:56,MobileNet,Mobilenet_conv1,baseline,17034226,1691777
-2026-05-15T12:24:56,MobileNet,Mobilenet_conv1,Row-stationary inspired,42785047,4055626
-2026-05-15T12:24:57,MobileNet,Mobilenet_conv1,weight_stationary_inspired,21315044,2340140
-2026-05-15T12:24:57,MobileNet,Mobilenet_conv1,output_stationary_inspired,22894501,2181435
-2026-05-15T12:24:58,MobileNet,MobileNet_dw2,baseline,18378782,1761995
-2026-05-15T12:24:59,MobileNet,MobileNet_dw2,Row-stationary inspired,42674544,3911871
-2026-05-15T12:24:59,MobileNet,MobileNet_dw2,weight_stationary_inspired,26891468,3861013
-2026-05-15T12:24:59,MobileNet,MobileNet_dw2,output_stationary_inspired,23783671,2193427
-2026-05-15T12:25:00,MobileNet,MobileNet_pw2,baseline,19465588,1681625
-2026-05-15T12:25:01,MobileNet,MobileNet_pw2,Row-stationary inspired,41831508,3926548
-2026-05-15T12:25:01,MobileNet,MobileNet_pw2,weight_stationary_inspired,17647077,2996564
-2026-05-15T12:25:01,MobileNet,MobileNet_pw2,output_stationary_inspired,25256110,2130508
-2026-05-15T12:25:02,MobileNet,MobileNet_dw3,baseline,17726891,1703327
-2026-05-15T12:25:03,MobileNet,MobileNet_dw3,Row-stationary inspired,42913605,3836473
-2026-05-15T12:25:03,MobileNet,MobileNet_dw3,weight_stationary_inspired,24223720,2402694
-2026-05-15T12:25:04,MobileNet,MobileNet_dw3,output_stationary_inspired,23618502,1947938
-2026-05-15T12:40:42,AlexNet,Alex_conv1,baseline,59860156,6555648
-2026-05-15T12:40:43,AlexNet,Alex_conv1,Row-stationary inspired,44459332,3879453
-2026-05-15T12:40:43,AlexNet,Alex_conv1,weight_stationary_inspired,38470499,1856959
-2026-05-15T12:40:44,AlexNet,Alex_conv1,output_stationary_inspired,28181680,2801645
-2026-05-15T12:40:45,AlexNet,Alex_conv2,baseline,16479097,1870804
-2026-05-15T12:40:46,AlexNet,Alex_conv2,Row-stationary inspired,42549378,3836814
-2026-05-15T12:40:46,AlexNet,Alex_conv2,weight_stationary_inspired,16178173,1804346
-2026-05-15T12:40:47,AlexNet,Alex_conv2,output_stationary_inspired,26211437,2593895
-2026-05-15T12:40:47,AlexNet,Alex_conv3,baseline,16532735,1863144
-2026-05-15T12:40:48,AlexNet,Alex_conv3,Row-stationary inspired,42646770,3841659
-2026-05-15T12:40:49,AlexNet,Alex_conv3,weight_stationary_inspired,16326595,1856062
-2026-05-15T12:40:50,AlexNet,Alex_conv3,output_stationary_inspired,27138999,2578048
-2026-05-15T12:40:50,AlexNet,Alex_conv4,baseline,16574140,1865983
-2026-05-15T12:40:51,AlexNet,Alex_conv4,Row-stationary inspired,42373744,3754143
-2026-05-15T12:40:51,AlexNet,Alex_conv4,weight_stationary_inspired,16301412,1872055
-2026-05-15T12:40:52,AlexNet,Alex_conv4,output_stationary_inspired,26995080,2710879
-2026-05-15T12:40:53,AlexNet,Alex_conv5,baseline,16518304,1772229
-2026-05-15T12:40:53,AlexNet,Alex_conv5,Row-stationary inspired,42372188,3701135
-2026-05-15T12:40:54,AlexNet,Alex_conv5,weight_stationary_inspired,16219690,1798687
-2026-05-15T12:40:55,AlexNet,Alex_conv5,output_stationary_inspired,26970109,2567510
-2026-05-15T12:40:55,VGG16,VGG_conv1_1,baseline,18016358,1988595
-2026-05-15T12:40:56,VGG16,VGG_conv1_1,Row-stationary inspired,42847631,3794079
-2026-05-15T12:40:56,VGG16,VGG_conv1_1,weight_stationary_inspired,26570552,3142549
-2026-05-15T12:40:57,VGG16,VGG_conv1_1,output_stationary_inspired,16579169,1902935
-2026-05-15T12:41:00,VGG16,VGG_conv1_2,baseline,474477812,18961427
-2026-05-15T12:41:01,VGG16,VGG_conv1_2,Row-stationary inspired,47303219,4023791
-2026-05-15T12:41:03,VGG16,VGG_conv1_2,weight_stationary_inspired,256938635,111944834
-2026-05-15T12:41:04,VGG16,VGG_conv1_2,output_stationary_inspired,46697228,5425925
-2026-05-15T12:41:05,VGG16,VGG_conv2_1,baseline,55643839,6097015
-2026-05-15T12:41:07,VGG16,VGG_conv2_1,Row-stationary inspired,43426077,3860324
-2026-05-15T12:41:08,VGG16,VGG_conv2_1,weight_stationary_inspired,109845569,35746185
-2026-05-15T12:41:08,VGG16,VGG_conv2_1,output_stationary_inspired,27097823,3908765
-2026-05-15T12:41:10,VGG16,VGG_conv3_1,baseline,37979240,1937203
-2026-05-15T12:41:11,VGG16,VGG_conv3_1,Row-stationary inspired,43434098,3667503
-2026-05-15T12:41:12,VGG16,VGG_conv3_1,weight_stationary_inspired,106331973,11215234
-2026-05-15T12:41:13,VGG16,VGG_conv3_1,output_stationary_inspired,30286797,2069034
-2026-05-15T12:41:14,VGG16,VGG_conv4_1,baseline,55148814,2344244
-2026-05-15T12:41:16,VGG16,VGG_conv4_1,Row-stationary inspired,43290021,4464409
-2026-05-15T12:41:17,VGG16,VGG_conv4_1,weight_stationary_inspired,94715597,2144497
-2026-05-15T12:41:18,VGG16,VGG_conv4_1,output_stationary_inspired,39194020,2549743
-2026-05-15T12:41:18,MobileNet,Mobilenet_conv1,baseline,17128268,2024219
-2026-05-15T12:41:19,MobileNet,Mobilenet_conv1,Row-stationary inspired,42765319,4059482
-2026-05-15T12:41:19,MobileNet,Mobilenet_conv1,weight_stationary_inspired,21558945,2522299
-2026-05-15T12:41:20,MobileNet,Mobilenet_conv1,output_stationary_inspired,16168514,1810736
-2026-05-15T12:41:20,MobileNet,MobileNet_dw2,baseline,18408645,1874740
-2026-05-15T12:41:21,MobileNet,MobileNet_dw2,Row-stationary inspired,42872023,4644468
-2026-05-15T12:41:21,MobileNet,MobileNet_dw2,weight_stationary_inspired,27028361,3739207
-2026-05-15T12:41:22,MobileNet,MobileNet_dw2,output_stationary_inspired,16723622,1846463
-2026-05-15T12:41:22,MobileNet,MobileNet_pw2,baseline,19464944,1718648
-2026-05-15T12:41:23,MobileNet,MobileNet_pw2,Row-stationary inspired,41729023,3803970
-2026-05-15T12:41:23,MobileNet,MobileNet_pw2,weight_stationary_inspired,17610207,3082658
-2026-05-15T12:41:24,MobileNet,MobileNet_pw2,output_stationary_inspired,16533606,1833627
-2026-05-15T12:41:24,MobileNet,MobileNet_dw3,baseline,17832198,1860654
-2026-05-15T12:41:25,MobileNet,MobileNet_dw3,Row-stationary inspired,42844526,4187765
-2026-05-15T12:41:26,MobileNet,MobileNet_dw3,weight_stationary_inspired,24416348,2684961
-2026-05-15T12:41:26,MobileNet,MobileNet_dw3,output_stationary_inspired,16425600,1820884
+timestamp,model,layer,schedule,llc_access,llc_misses,l2_refill,l2_read,l2_write
+2026-05-19T14:38:11,AlexNet,Alex_conv1,baseline,60277748,5584010,21226070,21226073,0
+2026-05-19T14:38:12,AlexNet,Alex_conv1,Row-stationary inspired,44760121,3909298,14430412,14430414,0
+2026-05-19T14:38:13,AlexNet,Alex_conv1,weight_stationary_inspired,34541122,1920631,7047358,7047360,0
+2026-05-19T14:38:13,AlexNet,Alex_conv1,output_stationary_inspired,28532972,2551457,9956930,9956933,0
+2026-05-19T14:38:14,AlexNet,Alex_conv2,baseline,16715849,1687877,5416078,5416081,0
+2026-05-19T14:38:15,AlexNet,Alex_conv2,Row-stationary inspired,42801621,3865214,13872679,13872681,0
+2026-05-19T14:38:15,AlexNet,Alex_conv2,weight_stationary_inspired,16372343,1688443,5317899,5317902,0
+2026-05-19T14:38:16,AlexNet,Alex_conv2,output_stationary_inspired,26615559,2503005,9455322,9455322,0
+2026-05-19T14:38:17,AlexNet,Alex_conv3,baseline,17030851,1884726,5582988,5582992,0
+2026-05-19T14:38:18,AlexNet,Alex_conv3,Row-stationary inspired,42857338,3805640,13823386,13823389,0
+2026-05-19T14:38:18,AlexNet,Alex_conv3,weight_stationary_inspired,16337542,1818731,5278002,5278007,0
+2026-05-19T14:38:19,AlexNet,Alex_conv3,output_stationary_inspired,27090629,2547738,9438495,9438497,0
+2026-05-19T14:38:19,AlexNet,Alex_conv4,baseline,16628504,1877651,5405283,5405288,0
+2026-05-19T14:38:20,AlexNet,Alex_conv4,Row-stationary inspired,42769336,3785375,13777192,13777193,0
+2026-05-19T14:38:21,AlexNet,Alex_conv4,weight_stationary_inspired,16302220,1763209,5280380,5280383,0
+2026-05-19T14:38:22,AlexNet,Alex_conv4,output_stationary_inspired,27071749,2492275,9453304,9453308,0
+2026-05-19T14:38:22,AlexNet,Alex_conv5,baseline,16542220,1596466,5365902,5365906,0
+2026-05-19T14:38:23,AlexNet,Alex_conv5,Row-stationary inspired,42321477,3647593,13642273,13642275,0
+2026-05-19T14:38:23,AlexNet,Alex_conv5,weight_stationary_inspired,16289674,1783744,5287771,5287776,0
+2026-05-19T14:38:24,AlexNet,Alex_conv5,output_stationary_inspired,27038940,2473597,9418061,9418065,0
+2026-05-19T14:38:24,VGG16,VGG_conv1_1,baseline,18243527,1811085,5479026,5479029,0
+2026-05-19T14:38:25,VGG16,VGG_conv1_1,Row-stationary inspired,43108594,3700249,13843925,13843926,0
+2026-05-19T14:38:26,VGG16,VGG_conv1_1,weight_stationary_inspired,26760175,3239509,5418366,5418369,0
+2026-05-19T14:38:26,VGG16,VGG_conv1_1,output_stationary_inspired,16426223,1671965,6040114,6040119,0
+2026-05-19T14:38:29,VGG16,VGG_conv1_2,baseline,456335591,18734001,30416731,30416735,0
+2026-05-19T14:38:30,VGG16,VGG_conv1_2,Row-stationary inspired,47422512,3993969,14270090,14270091,0
+2026-05-19T14:38:32,VGG16,VGG_conv1_2,weight_stationary_inspired,260533790,111894971,9147340,9147345,0
+2026-05-19T14:38:33,VGG16,VGG_conv1_2,output_stationary_inspired,51575202,5344176,20763673,20763676,0
+2026-05-19T14:38:35,VGG16,VGG_conv2_1,baseline,55113976,5722548,8700464,8700466,0
+2026-05-19T14:38:36,VGG16,VGG_conv2_1,Row-stationary inspired,43336527,3715583,13842237,13842240,0
+2026-05-19T14:38:37,VGG16,VGG_conv2_1,weight_stationary_inspired,109779250,34939670,6188441,6188444,0
+2026-05-19T14:38:38,VGG16,VGG_conv2_1,output_stationary_inspired,26970092,3451139,9533080,9533083,0
+2026-05-19T14:38:39,VGG16,VGG_conv3_1,baseline,38743359,2144259,6147680,6147684,0
+2026-05-19T14:38:40,VGG16,VGG_conv3_1,Row-stationary inspired,43549026,4033427,13900116,13900118,0
+2026-05-19T14:38:41,VGG16,VGG_conv3_1,weight_stationary_inspired,106464966,11762676,6144441,6144445,0
+2026-05-19T14:38:42,VGG16,VGG_conv3_1,output_stationary_inspired,29518558,2202913,7833100,7833105,0
+2026-05-19T14:38:44,VGG16,VGG_conv4_1,baseline,49555880,2124334,7085658,7085662,0
+2026-05-19T14:38:45,VGG16,VGG_conv4_1,Row-stationary inspired,42993752,3763724,13781671,13781673,0
+2026-05-19T14:38:46,VGG16,VGG_conv4_1,weight_stationary_inspired,89971018,2043518,5581760,5581765,0
+2026-05-19T14:38:47,VGG16,VGG_conv4_1,output_stationary_inspired,38791992,2444177,11583868,11583870,0
+2026-05-19T14:38:47,MobileNet,Mobilenet_conv1,baseline,17273564,1855260,5462569,5462572,0
+2026-05-19T14:38:48,MobileNet,Mobilenet_conv1,Row-stationary inspired,42892700,3957452,13875072,13875076,0
+2026-05-19T14:38:49,MobileNet,Mobilenet_conv1,weight_stationary_inspired,21457409,2419339,5337856,5337860,0
+2026-05-19T14:38:49,MobileNet,Mobilenet_conv1,output_stationary_inspired,15995396,1637126,5742341,5742344,0
+2026-05-19T14:38:49,MobileNet,MobileNet_dw2,baseline,18455121,1987769,6016958,6016961,0
+2026-05-19T14:38:50,MobileNet,MobileNet_dw2,Row-stationary inspired,42965905,3955479,13867692,13867696,0
+2026-05-19T14:38:51,MobileNet,MobileNet_dw2,weight_stationary_inspired,26934475,3920054,5356607,5356610,0
+2026-05-19T14:38:51,MobileNet,MobileNet_dw2,output_stationary_inspired,16660076,1838789,6007363,6007366,0
+2026-05-19T14:38:52,MobileNet,MobileNet_pw2,baseline,19461942,1900976,6578454,6578457,0
+2026-05-19T14:38:52,MobileNet,MobileNet_pw2,Row-stationary inspired,41799603,3695249,13579998,13580002,0
+2026-05-19T14:38:53,MobileNet,MobileNet_pw2,weight_stationary_inspired,17758924,3113343,5270733,5270736,0
+2026-05-19T14:38:53,MobileNet,MobileNet_pw2,output_stationary_inspired,16420129,1863448,6450451,6450454,0
+2026-05-19T14:38:53,MobileNet,MobileNet_dw3,baseline,17985576,1940353,5753396,5753400,0
+2026-05-19T14:38:54,MobileNet,MobileNet_dw3,Row-stationary inspired,42750912,3919518,13839053,13839054,0
+2026-05-19T14:38:55,MobileNet,MobileNet_dw3,weight_stationary_inspired,24097360,2690203,5399456,5399465,0
+2026-05-19T14:38:55,MobileNet,MobileNet_dw3,output_stationary_inspired,16251830,1713822,5745435,5745438,0
