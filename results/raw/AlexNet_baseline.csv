@@ -1,0 +1,6 @@
+model,layer_name,schedule,llc_access,llc_misses,l2_refill,l2_read,l2_write
+AlexNet,Alex_conv1,baseline,60277748,5584010,21226070,21226073,0
+AlexNet,Alex_conv2,baseline,16715849,1687877,5416078,5416081,0
+AlexNet,Alex_conv3,baseline,17030851,1884726,5582988,5582992,0
+AlexNet,Alex_conv4,baseline,16628504,1877651,5405283,5405288,0
+AlexNet,Alex_conv5,baseline,16542220,1596466,5365902,5365906,0

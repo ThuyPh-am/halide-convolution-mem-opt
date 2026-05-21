@@ -1,0 +1,6 @@
+model,layer_name,schedule,llc_access,llc_misses,l2_refill,l2_read,l2_write
+VGG16,VGG_conv1_1,output_stationary_inspired,16426223,1671965,6040114,6040119,0
+VGG16,VGG_conv1_2,output_stationary_inspired,51575202,5344176,20763673,20763676,0
+VGG16,VGG_conv2_1,output_stationary_inspired,26970092,3451139,9533080,9533083,0
+VGG16,VGG_conv3_1,output_stationary_inspired,29518558,2202913,7833100,7833105,0
+VGG16,VGG_conv4_1,output_stationary_inspired,38791992,2444177,11583868,11583870,0

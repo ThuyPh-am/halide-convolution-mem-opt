@@ -1,0 +1,5 @@
+model,layer_name,schedule,llc_access,llc_misses,l2_refill,l2_read,l2_write
+MobileNet,Mobilenet_conv1,Row-stationary inspired,42892700,3957452,13875072,13875076,0
+MobileNet,MobileNet_dw2,Row-stationary inspired,42965905,3955479,13867692,13867696,0
+MobileNet,MobileNet_pw2,Row-stationary inspired,41799603,3695249,13579998,13580002,0
+MobileNet,MobileNet_dw3,Row-stationary inspired,42750912,3919518,13839053,13839054,0

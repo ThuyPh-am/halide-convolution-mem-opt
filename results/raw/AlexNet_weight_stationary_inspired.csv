@@ -1,0 +1,6 @@
+model,layer_name,schedule,llc_access,llc_misses,l2_refill,l2_read,l2_write
+AlexNet,Alex_conv1,weight_stationary_inspired,34541122,1920631,7047358,7047360,0
+AlexNet,Alex_conv2,weight_stationary_inspired,16372343,1688443,5317899,5317902,0
+AlexNet,Alex_conv3,weight_stationary_inspired,16337542,1818731,5278002,5278007,0
+AlexNet,Alex_conv4,weight_stationary_inspired,16302220,1763209,5280380,5280383,0
+AlexNet,Alex_conv5,weight_stationary_inspired,16289674,1783744,5287771,5287776,0

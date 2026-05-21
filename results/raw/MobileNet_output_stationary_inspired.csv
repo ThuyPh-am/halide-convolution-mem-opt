@@ -1,0 +1,5 @@
+model,layer_name,schedule,llc_access,llc_misses,l2_refill,l2_read,l2_write
+MobileNet,Mobilenet_conv1,output_stationary_inspired,15995396,1637126,5742341,5742344,0
+MobileNet,MobileNet_dw2,output_stationary_inspired,16660076,1838789,6007363,6007366,0
+MobileNet,MobileNet_pw2,output_stationary_inspired,16420129,1863448,6450451,6450454,0
+MobileNet,MobileNet_dw3,output_stationary_inspired,16251830,1713822,5745435,5745438,0

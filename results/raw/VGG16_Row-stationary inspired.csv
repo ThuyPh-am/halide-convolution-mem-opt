@@ -1,0 +1,6 @@
+model,layer_name,schedule,llc_access,llc_misses,l2_refill,l2_read,l2_write
+VGG16,VGG_conv1_1,Row-stationary inspired,43108594,3700249,13843925,13843926,0
+VGG16,VGG_conv1_2,Row-stationary inspired,47422512,3993969,14270090,14270091,0
+VGG16,VGG_conv2_1,Row-stationary inspired,43336527,3715583,13842237,13842240,0
+VGG16,VGG_conv3_1,Row-stationary inspired,43549026,4033427,13900116,13900118,0
+VGG16,VGG_conv4_1,Row-stationary inspired,42993752,3763724,13781671,13781673,0
