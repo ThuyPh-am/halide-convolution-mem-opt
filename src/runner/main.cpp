@@ -6,13 +6,17 @@
 #include <iostream>
 #include <Halide.h>
 
-int main(){
+int main()
+{
     setenv("HL_DEBUG_CODEGEN", "0", 1);
     setenv("HL_NO_ASSERTS", "0", 1);
 
-    try{
-        for (const auto& model : ALL_MODELS){
-            for (const auto& layer : model.layers){
+    try
+    {
+        for (const auto &model : ALL_MODELS)
+        {
+            for (const auto &layer : model.layers)
+            {
                 std::cout << "[running] " << model.name << " " << layer.name << " baseline\n";
                 measure_layer_baseline(layer, model.name);
                 std::cout << "[running] " << model.name << " " << layer.name << " rs\n";
@@ -23,16 +27,18 @@ int main(){
                 measure_layer_os(layer, model.name);
             }
         }
-    } catch (const Halide::CompileError& e){
+    }
+    catch (const Halide::CompileError &e)
+    {
         std::cerr << "Halide::CompileError: " << e.what() << "\n";
         return 1;
     }
-    catch (const Halide::RuntimeError& e)
+    catch (const Halide::RuntimeError &e)
     {
         std::cerr << "Halide::RunTimeError: " << e.what() << "\n";
         return 1;
     }
-    catch (const std::exception& e)
+    catch (const std::exception &e)
     {
         std::cerr << "Exception: " << e.what() << "\n";
         return 1;

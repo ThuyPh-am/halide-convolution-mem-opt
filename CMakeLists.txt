@@ -33,7 +33,13 @@ add_executable(run_experiment
     src/generator/schedule_ws_inspired.cpp
     src/generator/schedule_os_inspired.cpp
 )
-
+add_executable(rs_debug
+    ../src/generator/schedule_rs_inspired.cpp
+    ../src/generator/convolution_base.cpp
+    ../src/runner/data_generator.cpp
+    ../src/runner/perf_wrapper.cpp
+)
+target_link_libraries(rs_debug PRIVATE Halide::Halide)
 target_link_libraries(run_experiment
     PRIVATE
         conv_base

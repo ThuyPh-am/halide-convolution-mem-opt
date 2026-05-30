@@ -11,7 +11,7 @@
 // W_in: ifmap plane width
 // K_h: filter plane height
 // K_w: filter plane width
-// H_out: ofmap plane height 
+// H_out: ofmap plane height
 // W_out: ofmap plane width
 
 #pragma once
@@ -22,7 +22,6 @@ constexpr int out_dim(int in, int pad, int k, int stride)
 {
     return (in + 2 * pad - k) / stride + 1;
 }
-
 
 struct Convo
 {
