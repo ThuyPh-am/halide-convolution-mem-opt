@@ -15,7 +15,7 @@ static constexpr bool INSPECT = true;
 static const std::string output_path = "../results/raw/raw_results.csv";
 
 void measure_layer_ws(const Convo &layer,
-                    const std::string &model)
+                      const std::string &model)
 {
 
     // prep input, weights and pipeline set up
@@ -24,20 +24,19 @@ void measure_layer_ws(const Convo &layer,
     auto ws_result = convo_base(layer.stride, layer.pad); // auto = {convolution, input, weights}
     ws_result.input.set(in_buff);
     ws_result.weights.set(weights_buff);
-    
+
     ws_result.convolution.compute_root();
 
     ws_result.convolution.update()
-                        .reorder(ws_result.W_out, 
-                            ws_result.H_out, ws_result.r[2], 
-                            ws_result.r[0], ws_result.r[1], ws_result.C_out);
-
+        .reorder(ws_result.W_out,
+                 ws_result.H_out, ws_result.r[2],
+                 ws_result.r[0], ws_result.r[1], ws_result.C_out);
 
     if (INSPECT)
     {
         std::cout << "\n======WS loop nest for [" << layer.name << "]====\n";
         ws_result.convolution.print_loop_nest();
-        std::cout << "======= end ======= \n\n";
+        std::cout << "============== \n\n";
     }
 
     // counting and realize
@@ -50,4 +49,7 @@ void measure_layer_ws(const Convo &layer,
     r.schedule_name = "weight_stationary_inspired";
     r.layer_name = layer.name;
     write_csv(output_path, r);
+    std::cout << "[" << layer.name << "] output: "
+              << layer.W_out << "x" << layer.H_out << "x" << layer.C_out << "\n";
+    std::cout << "======= end ======= \n\n";
 }

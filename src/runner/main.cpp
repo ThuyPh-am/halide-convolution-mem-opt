@@ -5,6 +5,22 @@
 #include "../generator/schedule_ws_inspired.h"
 #include <iostream>
 #include <Halide.h>
+#include <vector>
+
+void flush_cache()
+{
+    // Allocate and touch a buffer larger than L3
+    // to evict all cached data
+    static constexpr size_t FLUSH_SIZE = 4 * 1024 * 1024; // 4MB > 2MB L3
+    std::vector<char> flush_buf(FLUSH_SIZE, 0);
+    for (size_t i = 0; i < FLUSH_SIZE; i += 64)
+    {
+        flush_buf[i] = i & 0xFF;
+    }
+    // prevent compiler from optimizing away
+    volatile char x = flush_buf[FLUSH_SIZE - 1];
+    (void)x;
+}
 
 int main()
 {
@@ -17,12 +33,16 @@ int main()
         {
             for (const auto &layer : model.layers)
             {
+                flush_cache();
                 std::cout << "[running] " << model.name << " " << layer.name << " baseline\n";
                 measure_layer_baseline(layer, model.name);
+                flush_cache();
                 std::cout << "[running] " << model.name << " " << layer.name << " rs\n";
                 measure_layer_rs(layer, model.name);
+                flush_cache();
                 std::cout << "[running] " << model.name << " " << layer.name << " ws\n";
                 measure_layer_ws(layer, model.name);
+                flush_cache();
                 std::cout << "[running] " << model.name << " " << layer.name << " os\n";
                 measure_layer_os(layer, model.name);
             }

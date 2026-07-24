@@ -30,13 +30,14 @@ static constexpr bool INSPECT = true;
 
 static const std::string output_path = "../results/raw/raw_results.csv";
 
-void measure_layer_baseline(const Convo& layer,
-                const std::string& model){
+void measure_layer_baseline(const Convo &layer,
+                            const std::string &model)
+{
     // outside counter: data prep
     auto [in_buff, weights_buff] = data_generating(layer);
 
     // outisde counter: pipeline setup
-    auto result = convo_base(layer.stride, layer.pad); // result = [convolution, input, weights]
+    auto result = convo_base(layer.stride, layer.pad); // result = [convolution, input, weights, r, W_out, H_out, C_out]
 
     result.input.set(in_buff);
     result.weights.set(weights_buff);
@@ -47,14 +48,16 @@ void measure_layer_baseline(const Convo& layer,
     {
         std::cout << "\n======Baseline loop nest for [" << layer.name << "]====\n";
         result.convolution.print_loop_nest();
-        std::cout << "======= end ======= \n\n";
+        std::cout << "============== \n\n";
     }
     Buffer<float> output(layer.W_out, layer.H_out, layer.C_out);
-    PerfResult r = measure_convolution([&](){
-        result.convolution.realize(output);
-    });
+    PerfResult r = measure_convolution([&]()
+                                       { result.convolution.realize(output); });
     r.model_name = model;
     r.schedule_name = "baseline";
     r.layer_name = layer.name;
     write_csv(output_path, r);
+    std::cout << "[" << layer.name << "] output: "
+              << layer.W_out << "x" << layer.H_out << "x" << layer.C_out << "\n";
+    std::cout << "======= end ======= \n\n";
 }

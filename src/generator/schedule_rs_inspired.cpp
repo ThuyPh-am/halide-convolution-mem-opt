@@ -18,8 +18,8 @@ static const std::string output_path = "../results/raw/raw_results.csv";
 // tile size------------------------------------------
 // Choosen to fit a tile of (H_tile output rows) x (W_out) partial sums plus
 // the corresponding input row into L2 (~512 KB on Cortex~A76)
-static constexpr int H_TILE = 4;      // output rows per tile
-static constexpr int C_OUT_TILE = 16; // output channels per tile (filter reuse)
+static constexpr int H_TILE = 4;     // output rows per tile
+static constexpr int C_OUT_TILE = 4; // output channels per tile (filter reuse)
 
 void measure_layer_rs(const Convo &layer,
                       const std::string &model)
@@ -65,15 +65,16 @@ void measure_layer_rs(const Convo &layer,
                  rs_result.r[0], // kW
                  rs_result.r[1], // kH
                  rs_result.r[2], // C_in
-                 H_out_outer_u, C_out_outer_u)
-        .vectorize(rs_result.W_out, vec, TailStrategy::GuardWithIf)
-        .parallel(C_out_outer_u);
+                 C_out_outer_u, H_out_outer_u)
+        .vectorize(rs_result.W_out, vec, TailStrategy::GuardWithIf);
+    // .parallel(H_out_outer_u);
+    // .parallel(C_out_outer_u);
 
     if (INSPECT)
     {
         std::cout << "\n======RS loop nest for [" << layer.name << "]====\n";
         rs_result.convolution.print_loop_nest();
-        std::cout << "======= end ======= \n\n";
+        std::cout << "============== \n\n";
     }
 
     Buffer<float> output(W_out_ext, H_out_ext, C_out_ext);
@@ -86,12 +87,15 @@ void measure_layer_rs(const Convo &layer,
     write_csv(output_path, rs_res);
     std::cout << "[" << layer.name << "] output: "
               << layer.W_out << "x" << layer.H_out << "x" << layer.C_out << "\n";
+    std::cout << "======= end ======= \n\n";
 }
 
 // int main()
 // {
 //     try
 //     {
+//         std::cout << "Baseline schedule on Alex_conv2\n";
+//         measure_layer_baseline(AlexNet::conv2, "AlexNet");
 //         std::cout << "RS schedule on Alex_conv2\n";
 //         measure_layer_rs(AlexNet::conv2, "AlexNet");
 //     }

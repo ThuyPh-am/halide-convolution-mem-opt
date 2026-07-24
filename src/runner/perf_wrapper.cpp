@@ -19,6 +19,7 @@ static constexpr uint32_t ARM_PMU_L3D_CACHE = 0xa0;        // (l3d_cache_rd)
 static constexpr uint32_t ARM_PMU_L2D_CACHE_REFILL = 0x17;
 static constexpr uint32_t ARM_PMU_L2D_CACHE_REFILL_RD = 0x52;
 static constexpr uint32_t ARM_PMU_L2D_CACHE_REFILL_WR = 0x53;
+static constexpr uint32_t ARM_PMU_L2D_CACHE_REFILL_WB = 0x18;
 
 static int open_raw_pmu_event(uint32_t event_id)
 {
@@ -56,9 +57,10 @@ PerfResult measure_convolution(std::function<void()> conv_fn)
     int l2_refill = open_raw_pmu_event(ARM_PMU_L2D_CACHE_REFILL);
     int l2_rd = open_raw_pmu_event(ARM_PMU_L2D_CACHE_REFILL_RD);
     int l2_wr = open_raw_pmu_event(ARM_PMU_L2D_CACHE_REFILL_WR);
+    int l2_wb = open_raw_pmu_event(ARM_PMU_L2D_CACHE_REFILL_WB);
 
     // rum the kernel even if counters are unavailable
-    if (fd_refill == -1 || fd_access == -1 || l2_refill == -1 || l2_rd == -1 || l2_wr == -1)
+    if (fd_refill == -1 || fd_access == -1 || l2_refill == -1 || l2_rd == -1 || l2_wr == -1 || l2_wb == -1)
     {
         std::cerr << "[perf] Falling back to mock mode (no LLC counts). \n"
                   << "          Try sudo sysctl -w kernel.perf_event_paranoid=1\n";
@@ -72,13 +74,15 @@ PerfResult measure_convolution(std::function<void()> conv_fn)
             close(l2_rd);
         if (l2_wr != -1)
             close(l2_wr);
+        if (l2_wb != -1)
+            close(l2_wb);
         conv_fn();
         return result;
     }
     // reset, enable both counters
     ioctl(fd_refill, PERF_EVENT_IOC_RESET, 0);
-    ioctl(fd_access, PERF_EVENT_IOC_RESET, 0);
     ioctl(fd_refill, PERF_EVENT_IOC_ENABLE, 0);
+    ioctl(fd_access, PERF_EVENT_IOC_RESET, 0);
     ioctl(fd_access, PERF_EVENT_IOC_ENABLE, 0);
     ioctl(l2_refill, PERF_EVENT_IOC_RESET, 0);
     ioctl(l2_refill, PERF_EVENT_IOC_ENABLE, 0);
@@ -86,6 +90,8 @@ PerfResult measure_convolution(std::function<void()> conv_fn)
     ioctl(l2_rd, PERF_EVENT_IOC_ENABLE, 0);
     ioctl(l2_wr, PERF_EVENT_IOC_RESET, 0);
     ioctl(l2_wr, PERF_EVENT_IOC_ENABLE, 0);
+    ioctl(l2_wb, PERF_EVENT_IOC_RESET, 0);
+    ioctl(l2_wb, PERF_EVENT_IOC_ENABLE, 0);
     std::cerr << "[perf] counters enabled, starting kernel\n";
 
     conv_fn(); // ONLY MEASURE THE KERNEL
@@ -97,24 +103,28 @@ PerfResult measure_convolution(std::function<void()> conv_fn)
     ioctl(l2_refill, PERF_EVENT_IOC_DISABLE, 0);
     ioctl(l2_rd, PERF_EVENT_IOC_DISABLE, 0);
     ioctl(l2_wr, PERF_EVENT_IOC_DISABLE, 0);
+    ioctl(l2_wb, PERF_EVENT_IOC_DISABLE, 0);
 
     read(fd_refill, &result.llc_misses, sizeof(result.llc_misses));
     read(fd_access, &result.llc_accesses, sizeof(result.llc_accesses));
     read(l2_refill, &result.l2_refill, sizeof(result.l2_refill));
     read(l2_rd, &result.l2_read, sizeof(result.l2_read));
     read(l2_wr, &result.l2_write, sizeof(result.l2_write));
+    read(l2_wb, &result.l2_write_back, sizeof(result.l2_write_back));
 
     close(fd_refill);
     close(fd_access);
     close(l2_refill);
     close(l2_rd);
     close(l2_wr);
+    close(l2_wb);
 
     std::cout << "[perf] l3d_cache_refill (DRAM fetches): " << result.llc_misses << "\n"
               << "[perf] l3d_cache_rd    (L3 accesses):   " << result.llc_accesses << "\n"
               << "[perf] l2d_cache_refill    (L2 accesses):   " << result.l2_refill << "\n"
               << "[perf] l2d_cache_refill_rd    (L2 accesses):   " << result.l2_read << "\n"
-              << "[perf] l2d_cache_refill_wr    (L2 accesses):   " << result.l2_write << "\n";
+              << "[perf] l2d_cache_refill_wr    (L2 accesses):   " << result.l2_write << "\n"
+              << "[perf] l2d_cache_wb (L2 write back):  " << result.l2_write_back << "\n";
     if (result.llc_accesses > 0)
     {
         double miss_rate = 100.0 * result.llc_misses / result.llc_accesses;
