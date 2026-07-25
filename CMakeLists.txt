@@ -48,8 +48,10 @@ target_link_libraries(run_experiment
 #     ../src/generator/schedule_baseline.cpp
 # )
 # target_link_libraries(rs_debug PRIVATE Halide::Halide)
+add_executable(test_convolution
+    src/generator/test_convolution.cpp
+    src/generator/convolution_base.cpp
+)
+target_link_libraries(test_convolution PRIVATE Halide::Halide)
 
 
-#  sanity check
-add_executable(test_convolution src/generator/test_convolution.cpp)
-target_link_libraries(test_convolution PRIVATE conv_base)

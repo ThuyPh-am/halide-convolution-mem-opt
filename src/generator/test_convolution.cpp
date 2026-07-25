@@ -6,72 +6,82 @@ using namespace Halide;
 
 int main()
 {
-    ConvResult res = convo_base(1, 0);
 
     // === Realize on a small test case ===
     // 4x4 input, 1 channel, 2x2 kernel, 1 output filter
-    Buffer<float> in_buf(4, 4, 1);
-    Buffer<float> w_buf(2, 2, 1, 1);
+    Buffer<float> in_buf(5, 5, 3);
+    Buffer<float> w_buf(3, 3, 3, 2);
 
-    float in_data[4][4] = {
-        {1, 2, 3, 4},
-        {4, 5, 6, 7},
-        {2, 2, 3, 4},
-        {1, 4, 5, 7},
-    };
+    for (int c = 0; c < 3; c++)
+        for (int h = 0; h < 5; h++)
+            for (int w = 0; w < 5; w++)
+                in_buf(w, h, c) = 1.0f;
 
-    const int W_out_ext = 3;
-    const int H_out_ext = 3;
-    const int C_out_ext = 1;
+    for (int co = 0; co < 2; co++)
+        for (int ci = 0; ci < 3; ci++)
+            for (int kh = 0; kh < 3; kh++)
+                for (int kw = 0; kw < 3; kw++)
+                    w_buf(kw, kh, ci, co) = 1.0f;
+
+    // run baseline
+    auto base = convo_base(1, 0);
+    base.input.set(in_buf);
+    base.weights.set(w_buf);
+    base.convolution.compute_root();
+    Buffer<float> base_out = base.convolution.realize({3, 3, 2});
+
+    // run rs
+    auto rs = convo_base(1, 0);
+    rs.input.set(in_buf);
+    rs.weights.set(w_buf);
+
     static constexpr int H_TILE = 2;
     static constexpr int C_OUT_TILE = 2;
-    const int tile_H = std::min(H_TILE, H_out_ext);
-    const int tile_C = std::min(C_OUT_TILE, C_out_ext);
-    const int vec = std::min(8, W_out_ext);
-    for (int h = 0; h < 4; h++)
-    {
-        for (int w = 0; w < 4; w++)
-        {
-            in_buf(w, h, 0) = in_data[h][w];
-        }
-    }
-
-    // kernel [[1,2],[0,5]]
-    w_buf(0, 0, 0, 0) = 1;
-    w_buf(1, 0, 0, 0) = 2;
-    w_buf(0, 1, 0, 0) = 0;
-    w_buf(1, 1, 0, 0) = 5;
-
-    res.input.set(in_buf);
-    res.weights.set(w_buf);
+    const int tile_H = std::min(H_TILE, 3);
+    const int tile_C = std::min(C_OUT_TILE, 2);
+    const int vec = std::min(8, 3);
 
     Var H_out_outer_u("H_out_outer_u"), H_out_inner_u("H_out_inner_u");
     Var C_out_outer_u("C_out_outer_u"), C_out_inner_u("C_out_inner_u");
 
-    // output is 3x3 (4-2+1) for stride = 1, no padding
-    res.convolution.compute_root();
-    res.convolution.update()
-        .split(res.H_out, H_out_outer_u, H_out_inner_u, tile_H, TailStrategy::GuardWithIf)
-        .split(res.C_out, C_out_outer_u, C_out_inner_u, tile_C, TailStrategy::GuardWithIf)
-        .reorder(res.W_out,
+    rs.convolution.compute_root();
+    rs.convolution.update()
+        .split(rs.H_out, H_out_outer_u, H_out_inner_u, tile_H, TailStrategy::GuardWithIf)
+        .split(rs.C_out, C_out_outer_u, C_out_inner_u, tile_C, TailStrategy::GuardWithIf)
+        .reorder(rs.W_out,
                  H_out_inner_u,
                  C_out_inner_u,
-                 res.r[0], // kW
-                 res.r[1], // kH
-                 res.r[2], // C_in
-                 H_out_outer_u, C_out_outer_u)
-        .vectorize(res.W_out, vec, TailStrategy::GuardWithIf)
-        .parallel(C_out_outer_u);
-    res.convolution.print_loop_nest();
-    Buffer<float> output = res.convolution.realize({3, 3, 1});
+                 rs.r[0], rs.r[1], rs.r[2],
+                 C_out_outer_u, H_out_outer_u)
+        .vectorize(rs.W_out, vec, TailStrategy::GuardWithIf);
 
-    std::cout << "Output (3x3):" << std::endl;
-    for (int h = 0; h < 3; h++)
-    {
-        for (int w = 0; w < 3; w++)
-        {
-            std::cout << output(w, h, 0) << "\t";
-        }
-        std::cout << std::endl;
-    }
+    rs.convolution.print_loop_nest();
+    Buffer<float> rs_out = rs.convolution.realize({3, 3, 2});
+
+    // compare
+    float max_diff = 0.0f;
+    bool correct = true;
+    for (int c = 0; c < 2; c++)
+        for (int h = 0; h < 3; h++)
+            for (int w = 0; w < 3; w++)
+            {
+                float diff = std::abs(base_out(w, h, c) - rs_out(w, h, c));
+                if (diff > max_diff)
+                    max_diff = diff;
+                if (diff > 1e-3f)
+                {
+                    std::cout << "MISMATCH at (" << w << "," << h << "," << c << "): "
+                              << "base=" << base_out(w, h, c)
+                              << " rs=" << rs_out(w, h, c) << "\n";
+                    correct = false;
+                }
+            }
+
+    // with all-ones input and weights, every output = 3*3*3 = 27
+    std::cout << "Expected all outputs = 27.0\n";
+    std::cout << "base(0,0,0) = " << base_out(0, 0, 0) << "\n";
+    std::cout << "rs(0,0,0)   = " << rs_out(0, 0, 0) << "\n";
+    std::cout << (correct ? "CORRECT" : "WRONG")
+              << " max_diff=" << max_diff << "\n";
+    return correct ? 0 : 1;
 }
