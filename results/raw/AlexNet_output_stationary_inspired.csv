@@ -1,6 +1,6 @@
-model,layer_name,schedule,llc_access,llc_misses,l2_refill,l2_read,l2_write
-AlexNet,Alex_conv1,output_stationary_inspired,28532972,2551457,9956930,9956933,0
-AlexNet,Alex_conv2,output_stationary_inspired,26615559,2503005,9455322,9455322,0
-AlexNet,Alex_conv3,output_stationary_inspired,27090629,2547738,9438495,9438497,0
-AlexNet,Alex_conv4,output_stationary_inspired,27071749,2492275,9453304,9453308,0
-AlexNet,Alex_conv5,output_stationary_inspired,27038940,2473597,9418061,9418065,0
+model,layer_name,schedule,llc_access,llc_misses,l2_refill,l2_read,l2_write,l2_write_back
+AlexNet,Alex_conv1,output_stationary_inspired,14314350,2517636,9795394,9795396,0,13950757
+AlexNet,Alex_conv2,output_stationary_inspired,13528843,2528555,9453698,9453700,0,13295022
+AlexNet,Alex_conv3,output_stationary_inspired,13864924,2865643,9571364,9571367,0,13596229
+AlexNet,Alex_conv4,output_stationary_inspired,13745470,2758967,9543799,9543802,0,13537914
+AlexNet,Alex_conv5,output_stationary_inspired,13696521,2637153,9488476,9488479,0,13507820

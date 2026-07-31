@@ -1,6 +1,6 @@
-model,layer_name,schedule,llc_access,llc_misses,l2_refill,l2_read,l2_write
-AlexNet,Alex_conv1,baseline,60277748,5584010,21226070,21226073,0
-AlexNet,Alex_conv2,baseline,16715849,1687877,5416078,5416081,0
-AlexNet,Alex_conv3,baseline,17030851,1884726,5582988,5582992,0
-AlexNet,Alex_conv4,baseline,16628504,1877651,5405283,5405288,0
-AlexNet,Alex_conv5,baseline,16542220,1596466,5365902,5365906,0
+model,layer_name,schedule,llc_access,llc_misses,l2_refill,l2_read,l2_write,l2_write_back
+AlexNet,Alex_conv1,baseline,30329923,5847075,21527158,21527161,0,29897702
+AlexNet,Alex_conv2,baseline,8539639,1806983,5503245,5503248,0,8436042
+AlexNet,Alex_conv3,baseline,8741358,1831587,5534898,5534901,0,8636404
+AlexNet,Alex_conv4,baseline,8390964,1671672,5405405,5405408,0,8275442
+AlexNet,Alex_conv5,baseline,8348218,1712869,5416663,5416668,0,8238434

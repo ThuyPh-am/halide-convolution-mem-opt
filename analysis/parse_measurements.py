@@ -15,6 +15,7 @@ class layerResult:
     l2_refill : int 
     l2_read : int 
     l2_write : int = 0
+    l2_write_back : int = 0
 
 # alexnet, vgg16, mobilenet
 def load_results(csv_path: Path, model: str, schedule: str) -> list[layerResult]:
@@ -33,6 +34,7 @@ def load_results(csv_path: Path, model: str, schedule: str) -> list[layerResult]
                         l2_refill = int(row["l2_refill"]),
                         l2_read = int(row["l2_read"]),
                         l2_write = int(row["l2_write"]),
+                        l2_write_back = int(row["l2_write_back"]),
                     ))
                 except (KeyError, ValueError) as err :
                     print(f"Warning: skipping row{i} in {csv_path.name}: {err}")
@@ -60,7 +62,7 @@ def parse_res(layer_res: list[layerResult]) -> None:
 
 
 if __name__ == "__main__":
-    res_path = PROJECT_ROOT/"results"/"raw"/"raw_results.csv"
+    res_path = PROJECT_ROOT/"results"/"raw"/"clean_results.csv"
     for schedule in ["baseline", "Row-stationary inspired", "weight_stationary_inspired", "output_stationary_inspired"]:
         for model in ["AlexNet", "VGG16", "MobileNet"]:
             res = load_results(res_path, model, schedule)

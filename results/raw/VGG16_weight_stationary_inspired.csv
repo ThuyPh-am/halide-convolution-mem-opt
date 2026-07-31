@@ -1,6 +1,6 @@
-model,layer_name,schedule,llc_access,llc_misses,l2_refill,l2_read,l2_write
-VGG16,VGG_conv1_1,weight_stationary_inspired,26760175,3239509,5418366,5418369,0
-VGG16,VGG_conv1_2,weight_stationary_inspired,260533790,111894971,9147340,9147345,0
-VGG16,VGG_conv2_1,weight_stationary_inspired,109779250,34939670,6188441,6188444,0
-VGG16,VGG_conv3_1,weight_stationary_inspired,106464966,11762676,6144441,6144445,0
-VGG16,VGG_conv4_1,weight_stationary_inspired,89971018,2043518,5581760,5581765,0
+model,layer_name,schedule,llc_access,llc_misses,l2_refill,l2_read,l2_write,l2_write_back
+VGG16,VGG_conv1_1,weight_stationary_inspired,14487597,3322058,5465230,5465234,0,13178554
+VGG16,VGG_conv1_2,weight_stationary_inspired,149933065,111971032,8810075,8810079,0,114372890
+VGG16,VGG_conv2_1,weight_stationary_inspired,62566662,35438693,6061210,6061214,0,46695013
+VGG16,VGG_conv3_1,weight_stationary_inspired,57682607,11296686,6147336,6147341,0,48506727
+VGG16,VGG_conv4_1,weight_stationary_inspired,46317370,2272381,5583539,5583543,0,45982214

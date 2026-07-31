@@ -1,5 +1,5 @@
-model,layer_name,schedule,llc_access,llc_misses,l2_refill,l2_read,l2_write
-MobileNet,Mobilenet_conv1,Row-stationary inspired,42892700,3957452,13875072,13875076,0
-MobileNet,MobileNet_dw2,Row-stationary inspired,42965905,3955479,13867692,13867696,0
-MobileNet,MobileNet_pw2,Row-stationary inspired,41799603,3695249,13579998,13580002,0
-MobileNet,MobileNet_dw3,Row-stationary inspired,42750912,3919518,13839053,13839054,0
+model,layer_name,schedule,llc_access,llc_misses,l2_refill,l2_read,l2_write,l2_write_back
+MobileNet,Mobilenet_conv1,Row-stationary inspired,27256672,5266303,16808642,16808646,0,26976917
+MobileNet,MobileNet_dw2,Row-stationary inspired,27008437,5013738,16704223,16704224,0,26749247
+MobileNet,MobileNet_pw2,Row-stationary inspired,26802753,5206937,16594885,16594889,0,26542238
+MobileNet,MobileNet_dw3,Row-stationary inspired,27020577,5227302,16678579,16678582,0,26764136

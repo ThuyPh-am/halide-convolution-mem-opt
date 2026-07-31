@@ -1,5 +1,5 @@
-model,layer_name,schedule,llc_access,llc_misses,l2_refill,l2_read,l2_write
-MobileNet,Mobilenet_conv1,baseline,17273564,1855260,5462569,5462572,0
-MobileNet,MobileNet_dw2,baseline,18455121,1987769,6016958,6016961,0
-MobileNet,MobileNet_pw2,baseline,19461942,1900976,6578454,6578457,0
-MobileNet,MobileNet_dw3,baseline,17985576,1940353,5753396,5753400,0
+model,layer_name,schedule,llc_access,llc_misses,l2_refill,l2_read,l2_write,l2_write_back
+MobileNet,Mobilenet_conv1,baseline,8636112,1754793,5441212,5441215,0,8534507
+MobileNet,MobileNet_dw2,baseline,9237449,1639907,5959176,5959179,0,9142138
+MobileNet,MobileNet_pw2,baseline,9753996,1620308,6681725,6681727,0,9657492
+MobileNet,MobileNet_dw3,baseline,8965254,1658003,5678065,5678068,0,8876341
