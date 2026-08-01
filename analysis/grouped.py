@@ -3,15 +3,21 @@ from pathlib import Path
 
 SCRIPT_DIR = Path(__file__).resolve().parent
 PROJECT_ROOT = SCRIPT_DIR.parent
+RAW = PROJECT_ROOT / "results" / "raw"
+PROCESSED =  PROJECT_ROOT / "results" / "processed"
 
 def groupData(csv_path:str) -> None:
-    grouped_path = PROJECT_ROOT/ "results"/ "raw"
-    grouped_path.mkdir(parents=True, exist_ok=True)
-    raw_data = PROJECT_ROOT/"results"/"raw"/csv_path
-    df = pd.read_csv(raw_data)
-    grouped_df = df.sort_values(by=["model","schedule"])
-    grouped_df[grouped_df["schedule"] == "baseline"].to_csv(grouped_path/"baseline_data.csv", index=False,header=True)
-    grouped_df[grouped_df["schedule"] != "baseline"].to_csv(grouped_path/"grouped_data.csv", index=False,header=True)
+    PROCESSED.mkdir(parents=True, exist_ok=True)
+    df = pd.read_csv(RAW/ csv_path)
+    df.sort_values(by=["model", "layer", "schedule"], inplace=True)
+
+    baseline = df[df["schedule"] == "baseline"]
+    scheduled = df[df["schedule"] != "baseline"]
+
+    baseline.to_csv(PROCESSED / "baseline_data.csv", index=False)
+    scheduled.to_csv(PROCESSED/ "grouped_data.csv", index=False)
+    print(f"baseline_data.csv: {len(baseline)} rows")
+    print(f"grouped_data.csv: {len(scheduled)} rows")
 
 if __name__ == "__main__":
     groupData("clean_results.csv")

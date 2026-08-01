@@ -6,47 +6,39 @@ SCRIPT_DIR = Path(__file__).resolve().parent
 PROJECT_ROOT = SCRIPT_DIR.parent
 PROCESSED = PROJECT_ROOT/ "results"/ "processed"
 
-def describe(baseline_path:str, schedule_path: str) -> tuple[pd.DataFrame, pd.DataFrame]:
-    baseline_path = PROCESSED/baseline_path
-    schedule_path = PROCESSED/schedule_path
-  
-    description = PROCESSED/ "description.csv"
-    
-    scheduled_df = pd.read_csv(schedule_path).drop(columns=['timestamp', 'l2_write'])
-    baseline_df = pd.read_csv(baseline_path).drop(columns=['timestamp', 'l2_write'])
+DROP_COLS = ['timestamp', 'l2_write']
+
+def describe(scheduled_df:pd.DataFrame) -> None:
+    description = PROCESSED / "description.csv"
     scheduled_df.describe().to_csv(description, index=True,header=True)
-    
-    return baseline_df, scheduled_df
 
-def normalize(baseline_df:pd.DataFrame, scheduled_df:pd.DataFrame) -> pd.DataFrame:
-    merge = scheduled_df.merge(baseline_df, on=["model", "layer"], suffixes=("","_baseline"))
+def normalize() -> pd.DataFrame:
+    baseline_df = pd.read_csv(PROCESSED / "baseline_data.csv").drop(columns=DROP_COLS)
+    scheduled_df = pd.read_csv(PROCESSED / "grouped_data.csv").drop(columns=DROP_COLS)
 
-    normalized_df = merge.copy()
-    numeric_cols = scheduled_df.select_dtypes(include=["number"]).columns
-    for col in numeric_cols:
-        baseline_col = f"{col}_baseline"
-        if baseline_col in merge.columns:
-            normalized_df[col] = normalized_df[col]/normalized_df[baseline_col]
+    describe(scheduled_df
+             )
+    baseline_key = baseline_df[["model","layer", "llc_misses", "llc_access", "l2_refill", "l2_read", "l2_write_back"]]
 
-    baseline_cols = [col for col in normalized_df.columns if col.endswith("_baseline")]
-    normalized_df.drop(columns=baseline_cols, inplace=True)
-    normalized_df.to_csv(PROCESSED/"normalized.csv", index=False)
-    return normalized_df
+    baseline_key = baseline_key.rename(columns={
+        "llc_misses": "baseline_llc_misses",
+        "llc_access": "baseline_llc_access",
+        "l2_refill":  "baseline_l2_refill",
+        "l2_read" :   "baseline_l2_read",
+        "l2_write_back" : "baseline_l2_wb",
+    })
 
-def scaled(scheduled_df:pd.DataFrame) -> pd.DataFrame:
-    # using min max feature scaling
-    scaled = scheduled_df.copy()
-    numeric_cols = scheduled_df.select_dtypes(include=['number']).columns
-    for col in numeric_cols:
-        min_val = scaled[col].min()
-        max_val = scaled[col].max()
+    merged = scheduled_df.merge(baseline_key, on=["model", "layer"])
 
-        if min_val != max_val:
-            scaled[col] = (scaled[col] - min_val) / (max_val - min_val)
-    scaled.to_csv(PROCESSED/"scaled.csv", index=False, header=True)
-    return scaled
+    merged["norm_llc_misses"] = merged["llc_misses"] / merged["baseline_llc_misses"]
+    merged["norm_llc_access"] = merged["llc_access"] / merged["baseline_llc_access"]
+    merged["norm_l2_refill"] = merged["l2_refill"] / merged["baseline_l2_refill"]
+    merged["norm_l2_wb"] = merged["l2_write_back"] / merged["baseline_l2_wb"]
+
+    merged.to_csv(PROCESSED / "normalized.csv", index=False)
+    print(f"Saved normalized.csv: {len(merged)} rows")
+    print(merged[["model", "layer", "schedule", "norm_llc_misses"]].to_string())
+    return merged
 
 if __name__ == "__main__":
-    baseline_df, scheduled_df = describe("baseline_data.csv", "grouped_data.csv")
-    normalized_df = normalize(baseline_df, scheduled_df)
-    scaled(normalized_df)
+    normalize()
