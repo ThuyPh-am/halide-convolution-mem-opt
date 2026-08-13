@@ -1,25 +1,10 @@
 # https://matplotlib.org/stable/gallery/lines_bars_and_markers/barchart.html
-
 import numpy as np
+import pandas as pd
 import matplotlib.pyplot as plt
 from pathlib import Path
-import pandas as pd
+from config import PROJECT_ROOT, PROCESSED, PLOT, SCHEDULES, LABELS, MODELS
 
-SCRIPT_DIR = Path(__file__).resolve().parent
-PROJECT_ROOT = SCRIPT_DIR.parent
-PROCESSED = PROJECT_ROOT/ "results"/ "processed"
-PLOT = PROJECT_ROOT/"results"/"plot"
-
-SCHEDULES = [
-    "Row-stationary inspired",
-    "weight_stationary_inspired",
-    "output_stationary_inspired",
-]
-LABELS = {
-    "Row-stationary inspired":      "RS-Inspired",
-    "weight_stationary_inspired":   "WS-Inspired",
-    "output_stationary_inspired":   "OS-Inspired",
-}
 COLORS = {
     "Row-stationary inspired":      "#4C72B0",
     "weight_stationary_inspired":   "#DD8452",
@@ -34,7 +19,7 @@ def visualize(csv_path:str) -> None:
     PLOT.mkdir(parents=True, exist_ok=True)
     df = pd.read_csv(PROCESSED / csv_path)
 
-    for model in ["AlexNet", "VGG16", "MobileNet"]:
+    for model in MODELS:
         model_df = df[df['model'] == model]
         layers = model_df['layer'].unique()
         x = np.arange(len(layers))
