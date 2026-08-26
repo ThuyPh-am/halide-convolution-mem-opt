@@ -12,7 +12,7 @@ def heatmap(csv_path:str) -> None:
     pivot=df.pivot_table(
         index="layer",
         columns="schedule",
-        values="norm_llc_access",
+        values="norm_llc_misses",
         aggfunc="mean"
     )
 
