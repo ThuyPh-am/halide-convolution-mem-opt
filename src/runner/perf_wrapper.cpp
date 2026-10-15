@@ -11,6 +11,18 @@
 #include <functional>
 #include <cstring>
 #include <cerrno>
+#include <vector>
+
+// Evict L2/L3 right before counting: touch a buffer larger than the 2 MB L3
+static void flush_cache()
+{
+    static constexpr size_t FLUSH_SIZE = 4 * 1024 * 1024;
+    std::vector<char> flush_buf(FLUSH_SIZE, 0);
+    for (size_t i = 0; i < FLUSH_SIZE; i += 64)
+        flush_buf[i] = i & 0xFF;
+    volatile char x = flush_buf[FLUSH_SIZE - 1];
+    (void)x;
+}
 
 // ARM Cortex A76 PMU event numbers (ARMv8 architecture)
 // Source: ARM Architecture Reference Manual / Cortex A76 TRM
@@ -51,6 +63,8 @@ PerfResult measure_convolution(std::function<void()> conv_fn)
 {
     PerfResult result;
     result.llc_misses = -1; // measurement unavailable
+
+    flush_cache(); // after data generation + JIT compile, before counters
 
     int fd_refill = open_raw_pmu_event(ARM_PMU_L3D_CACHE_REFILL);
     int fd_access = open_raw_pmu_event(ARM_PMU_L3D_CACHE);

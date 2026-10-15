@@ -13,7 +13,7 @@
 using namespace Halide;
 
 static constexpr bool INSPECT = true;
-static const std::string output_path = "../results/raw/raw_results.csv";
+static const std::string output_path = "../results/raw/rerun_results.csv";
 
 // tile size------------------------------------------
 // Choosen to fit a tile of (H_tile output rows) x (W_out) partial sums plus
@@ -77,7 +77,11 @@ void measure_layer_rs(const Convo &layer,
         std::cout << "============== \n\n";
     }
 
+    rs_result.convolution.compile_jit(); // compile outside the counted window
+
     Buffer<float> output(W_out_ext, H_out_ext, C_out_ext);
+
+    output.fill(0.0f); // fault output pages in before counting
     PerfResult rs_res = measure_convolution([&]()
                                             { rs_result.convolution.realize(output); });
 

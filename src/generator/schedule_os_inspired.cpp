@@ -13,7 +13,7 @@ using namespace Halide;
 
 static constexpr bool INSPECT = true;
 
-static const std::string output_path = "../results/raw/raw_results.csv";
+static const std::string output_path = "../results/raw/rerun_results.csv";
 
 static constexpr int H_TILE = 8; // output rows per tile
 static constexpr int W_TILE = 8; // output columns per tile
@@ -54,7 +54,7 @@ void measure_layer_os(const Convo &layer,
               Halide::TailStrategy::GuardWithIf)
         .vectorize(W_out_inner)
         .fuse(W_out_outer, H_out_outer, tile_index)
-        .parallel(tile_index);
+        ; // single-threaded: per-thread counters miss Halide workers
     // r[kW] -> r[kH] -> r[C_in]
 
     os_result.convolution.update()
@@ -66,7 +66,6 @@ void measure_layer_os(const Convo &layer,
                  W_out_inner, H_out_inner, W_out_outer, H_out_outer,
                  os_result.C_out)
         .fuse(W_out_outer, H_out_outer, tile_index)
-        .parallel(tile_index)
         .vectorize(W_out_inner);
 
     if (INSPECT)
@@ -77,7 +76,9 @@ void measure_layer_os(const Convo &layer,
     }
 
     // run counter
+    os_result.convolution.compile_jit(); // compile outside the counted window
     Buffer<float> output(W_out_ext, H_out_ext, C_out_ext);
+    output.fill(0.0f); // fault output pages in before counting
     PerfResult os_res = measure_convolution([&]()
                                             { os_result.convolution.realize(output); });
     // write csv

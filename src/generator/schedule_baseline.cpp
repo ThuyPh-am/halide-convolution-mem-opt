@@ -28,7 +28,7 @@ using namespace Halide;
 
 static constexpr bool INSPECT = true;
 
-static const std::string output_path = "../results/raw/raw_results.csv";
+static const std::string output_path = "../results/raw/rerun_results.csv";
 
 void measure_layer_baseline(const Convo &layer,
                             const std::string &model)
@@ -50,7 +50,9 @@ void measure_layer_baseline(const Convo &layer,
         result.convolution.print_loop_nest();
         std::cout << "============== \n\n";
     }
+    result.convolution.compile_jit(); // compile outside the counted window
     Buffer<float> output(layer.W_out, layer.H_out, layer.C_out);
+    output.fill(0.0f); // fault output pages in before counting
     PerfResult r = measure_convolution([&]()
                                        { result.convolution.realize(output); });
     r.model_name = model;

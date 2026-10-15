@@ -29,7 +29,7 @@ void write_csv(const std::string &output_path, const PerfResult &layer_result)
     if (needs_header)
     {
 
-        file << "timestamp,model,layer,schedule,llc_access,llc_misses,l2_refill,l2_read,l2_write\n";
+        file << "timestamp,model,layer,schedule,llc_access,llc_misses,l2_refill,l2_read,l2_write,l2_write_back\n";
     }
 
     file << current_timestamp() << ","
@@ -40,7 +40,7 @@ void write_csv(const std::string &output_path, const PerfResult &layer_result)
          << layer_result.llc_misses << ","
          << layer_result.l2_refill << ","
          << layer_result.l2_read << ","
-         << layer_result.l2_write << "\n"
+         << layer_result.l2_write << ","
          << layer_result.l2_write_back << "\n";
 
     file.close();
