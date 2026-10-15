@@ -44,11 +44,11 @@ inline const Convo Test_layer(4, 8, 8, 8, 3, 3, 1, 1, "tiny_3x3_4to8");
 
 namespace AlexNet
 {
-    inline const Convo conv1(3, 227, 227, 96, 11, 11, 4, 1, "Alex_conv1");
-    inline const Convo conv2(48, 31, 31, 256, 5, 5, 1, 1, "Alex_conv2");
-    inline const Convo conv3(256, 15, 15, 384, 3, 3, 1, 1, "Alex_conv3");
-    inline const Convo conv4(192, 15, 15, 384, 3, 3, 1, 1, "Alex_conv4");
-    inline const Convo conv5(192, 15, 15, 256, 3, 3, 1, 1, "Alex_conv5");
+    inline const Convo conv1(3, 227, 227, 96, 11, 11, 4, 0, "Alex_conv1");
+    inline const Convo conv2(48, 31, 31, 256, 5, 5, 1, 0, "Alex_conv2");
+    inline const Convo conv3(256, 15, 15, 384, 3, 3, 1, 0, "Alex_conv3");
+    inline const Convo conv4(192, 15, 15, 384, 3, 3, 1, 0, "Alex_conv4");
+    inline const Convo conv5(192, 15, 15, 256, 3, 3, 1, 0, "Alex_conv5");
     inline const std::vector<Convo> layers = {conv1, conv2, conv3, conv4, conv5};
 }
 
