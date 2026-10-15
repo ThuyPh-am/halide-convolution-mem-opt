@@ -10,7 +10,7 @@ RAW = PROJECT_ROOT / "results" / "raw"
 PLOT = PROJECT_ROOT / "results" / "plot"
 EYERISS = PROJECT_ROOT / "eyeriss_reference" 
 SCHEDULES = ["Row-stationary inspired", "weight_stationary_inspired", "output_stationary_inspired"]
-MODELS = ["ALEXNET", "VGG16", "MOBILENET"]
+MODELS = ["AlexNet", "VGG16", "MobileNet"]
 LABELS = {
         "Row-stationary inspired":      "RS-Inspired",
     "weight_stationary_inspired":   "WS-Inspired",

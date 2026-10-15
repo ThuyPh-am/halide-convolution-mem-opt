@@ -1,0 +1,11 @@
+layer,best_schedule,pi_mb_per_image,baseline_mb_per_image,eyeriss_dram_mb,batch_size,eyeriss_mb_per_image,gap_fp32,gap_16bit_equiv
+Alex_conv1,output_stationary_inspired,3.534,3.909,5.0,4,1.25,2.827,1.414
+Alex_conv2,baseline,2.948,2.948,4.0,4,1.0,2.948,1.474
+Alex_conv3,weight_stationary_inspired,4.607,4.744,3.0,4,0.75,6.143,3.071
+Alex_conv4,weight_stationary_inspired,3.541,3.709,2.1,4,0.525,6.745,3.372
+Alex_conv5,weight_stationary_inspired,2.496,2.589,1.3,4,0.325,7.679,3.839
+VGG_conv1_1,Row-stationary inspired,14.51,14.591,15.4,3,5.133,2.827,1.413
+VGG_conv1_2,Row-stationary inspired,36.301,1082.353,54.0,3,18.0,2.017,1.008
+VGG_conv2_1,Row-stationary inspired,17.161,264.328,33.4,3,11.133,1.541,0.771
+VGG_conv3_1,output_stationary_inspired,18.139,20.318,20.2,3,6.733,2.694,1.347
+VGG_conv4_1,output_stationary_inspired,12.492,19.983,17.8,3,5.933,2.105,1.053
