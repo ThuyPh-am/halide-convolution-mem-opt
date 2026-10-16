@@ -26,3 +26,10 @@ COLORS = {
 DROP_COLS = ['timestamp', 'l2_write']
 WIDTH = 0.25
 Y_MAX = 7.5
+# raw layer names that are spelled inconsistently in the C++ layer list
+LAYER_RENAME = {"Mobilenet_conv1": "MobileNet_conv1"}
+LAYER_ORDER = [
+    "Alex_conv1", "Alex_conv2", "Alex_conv3", "Alex_conv4", "Alex_conv5",
+    "VGG_conv1_1", "VGG_conv1_2", "VGG_conv2_1", "VGG_conv3_1", "VGG_conv4_1",
+    "MobileNet_conv1", "MobileNet_dw2", "MobileNet_pw2", "MobileNet_dw3",
+]

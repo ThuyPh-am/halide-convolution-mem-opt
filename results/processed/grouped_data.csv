@@ -14,6 +14,9 @@ timestamp,model,layer,schedule,llc_access,llc_misses,l2_refill,l2_read,l2_write,
 2026-10-16T00:31:56,AlexNet,Alex_conv5,Row-stationary inspired,202786,111625,41256,41259,0,197439
 2026-10-16T00:31:57,AlexNet,Alex_conv5,output_stationary_inspired,55472,39642,25314,25317,0,52043
 2026-10-16T00:31:56,AlexNet,Alex_conv5,weight_stationary_inspired,58279,38993,19425,19428,0,56260
+2026-10-16T00:32:30,MobileNet,MobileNet_conv1,Row-stationary inspired,162175,117019,54298,54301,0,158033
+2026-10-16T00:32:31,MobileNet,MobileNet_conv1,output_stationary_inspired,456444,218437,307085,307088,0,453998
+2026-10-16T00:32:30,MobileNet,MobileNet_conv1,weight_stationary_inspired,3126826,776356,80332,80338,0,2526663
 2026-10-16T00:32:32,MobileNet,MobileNet_dw2,Row-stationary inspired,144657,70652,28491,28496,0,138680
 2026-10-16T00:32:33,MobileNet,MobileNet_dw2,output_stationary_inspired,1003183,108566,460838,460841,0,999355
 2026-10-16T00:32:33,MobileNet,MobileNet_dw2,weight_stationary_inspired,6237465,1915039,86362,86366,0,4436917
@@ -23,9 +26,6 @@ timestamp,model,layer,schedule,llc_access,llc_misses,l2_refill,l2_read,l2_write,
 2026-10-16T00:32:35,MobileNet,MobileNet_pw2,Row-stationary inspired,160586,97942,50653,51349,0,159136
 2026-10-16T00:32:35,MobileNet,MobileNet_pw2,output_stationary_inspired,1764241,167802,1602829,1602832,0,1760640
 2026-10-16T00:32:35,MobileNet,MobileNet_pw2,weight_stationary_inspired,1489904,1310694,37449,37453,0,242883
-2026-10-16T00:32:30,MobileNet,Mobilenet_conv1,Row-stationary inspired,162175,117019,54298,54301,0,158033
-2026-10-16T00:32:31,MobileNet,Mobilenet_conv1,output_stationary_inspired,456444,218437,307085,307088,0,453998
-2026-10-16T00:32:30,MobileNet,Mobilenet_conv1,weight_stationary_inspired,3126826,776356,80332,80338,0,2526663
 2026-10-16T00:31:59,VGG16,VGG_conv1_1,Row-stationary inspired,330286,226719,102771,102774,0,325832
 2026-10-16T00:31:59,VGG16,VGG_conv1_1,output_stationary_inspired,904715,417182,606606,606609,0,901984
 2026-10-16T00:31:59,VGG16,VGG_conv1_1,weight_stationary_inspired,6234902,1521574,155940,155944,0,5045915

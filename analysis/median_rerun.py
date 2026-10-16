@@ -1,13 +1,14 @@
 # Collapse the repeated runs in rerun_results.csv into one median row per
 # (model, layer, schedule) and write it as clean_results.csv for the pipeline.
 import pandas as pd
-from config import RAW
+from config import RAW, LAYER_RENAME
 
 COLS = ["llc_access", "llc_misses", "l2_refill", "l2_read", "l2_write", "l2_write_back"]
 
 def median_rerun(src: str = "rerun_results.csv", dst: str = "clean_results.csv") -> None:
     d = pd.read_csv(RAW / src)
-    d = d[d.model != "Test"]
+    d = d[d.model != "Test"].copy()
+    d["layer"] = d.layer.replace(LAYER_RENAME)
     m = (d.groupby(["model", "layer", "schedule"], sort=False)
            .agg({"timestamp": "first", **{c: "median" for c in COLS}})
            .reset_index()[["timestamp", "model", "layer", "schedule"] + COLS])

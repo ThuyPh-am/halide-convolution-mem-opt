@@ -39,10 +39,10 @@ timestamp,model,layer,schedule,llc_access,llc_misses,l2_refill,l2_read,l2_write,
 2026-10-16T00:32:26,VGG16,VGG_conv4_1,Row-stationary inspired,2006660,682663,256724,256727,0,1983650
 2026-10-16T00:32:27,VGG16,VGG_conv4_1,weight_stationary_inspired,38168414,454595,321953,321955,0,37926145
 2026-10-16T00:32:29,VGG16,VGG_conv4_1,output_stationary_inspired,23141125,195181,3733075,3733078,0,23093818
-2026-10-16T00:32:29,MobileNet,Mobilenet_conv1,baseline,333154,126123,54851,54855,0,330671
-2026-10-16T00:32:30,MobileNet,Mobilenet_conv1,Row-stationary inspired,162175,117019,54298,54301,0,158033
-2026-10-16T00:32:30,MobileNet,Mobilenet_conv1,weight_stationary_inspired,3126826,776356,80332,80338,0,2526663
-2026-10-16T00:32:31,MobileNet,Mobilenet_conv1,output_stationary_inspired,456444,218437,307085,307088,0,453998
+2026-10-16T00:32:29,MobileNet,MobileNet_conv1,baseline,333154,126123,54851,54855,0,330671
+2026-10-16T00:32:30,MobileNet,MobileNet_conv1,Row-stationary inspired,162175,117019,54298,54301,0,158033
+2026-10-16T00:32:30,MobileNet,MobileNet_conv1,weight_stationary_inspired,3126826,776356,80332,80338,0,2526663
+2026-10-16T00:32:31,MobileNet,MobileNet_conv1,output_stationary_inspired,456444,218437,307085,307088,0,453998
 2026-10-16T00:32:31,MobileNet,MobileNet_dw2,baseline,977567,145580,633654,633659,0,969147
 2026-10-16T00:32:32,MobileNet,MobileNet_dw2,Row-stationary inspired,144657,70652,28491,28496,0,138680
 2026-10-16T00:32:33,MobileNet,MobileNet_dw2,weight_stationary_inspired,6237465,1915039,86362,86366,0,4436917

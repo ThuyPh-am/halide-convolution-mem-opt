@@ -64,7 +64,7 @@ namespace VGG16
 
 namespace MobileNet
 {
-    inline const Convo conv1(3, 224, 224, 32, 3, 3, 1, 1, "Mobilenet_conv1");
+    inline const Convo conv1(3, 224, 224, 32, 3, 3, 1, 1, "MobileNet_conv1");
     inline const Convo dw2(32, 112, 112, 32, 3, 3, 1, 1, "MobileNet_dw2");
     inline const Convo pw2(32, 112, 112, 64, 1, 1, 1, 0, "MobileNet_pw2");
     inline const Convo dw3(64, 56, 56, 64, 3, 3, 1, 1, "MobileNet_dw3");

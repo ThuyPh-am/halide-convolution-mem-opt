@@ -9,7 +9,7 @@ VGG16,VGG_conv1_2,0.074,0.079,0.006,0.012,5
 VGG16,VGG_conv2_1,0.057,0.343,0.011,0.051,5
 VGG16,VGG_conv3_1,0.718,0.304,0.005,0.133,5
 VGG16,VGG_conv4_1,0.631,0.067,0.338,0.672,5
-MobileNet,Mobilenet_conv1,0.293,0.084,0.151,0.019,5
+MobileNet,MobileNet_conv1,0.293,0.084,0.151,0.019,5
 MobileNet,MobileNet_dw2,0.3,0.382,0.028,0.33,5
 MobileNet,MobileNet_pw2,0.458,0.134,0.006,0.255,5
 MobileNet,MobileNet_dw3,0.357,0.497,0.048,1.082,5

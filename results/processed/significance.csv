@@ -1,0 +1,43 @@
+model,layer,schedule,ratio_median,ratio_min,ratio_max,runs,verdict
+AlexNet,Alex_conv1,Row-stationary inspired,0.957,0.733,1.681,5,no difference
+AlexNet,Alex_conv1,output_stationary_inspired,0.904,0.787,1.031,5,no difference
+AlexNet,Alex_conv1,weight_stationary_inspired,2.549,2.28,3.978,5,worse
+AlexNet,Alex_conv2,Row-stationary inspired,3.548,3.153,4.666,5,worse
+AlexNet,Alex_conv2,output_stationary_inspired,1.041,0.939,1.07,5,no difference
+AlexNet,Alex_conv2,weight_stationary_inspired,1.033,0.916,1.199,5,no difference
+AlexNet,Alex_conv3,Row-stationary inspired,3.253,3.06,3.341,5,worse
+AlexNet,Alex_conv3,output_stationary_inspired,0.974,0.945,1.009,5,no difference
+AlexNet,Alex_conv3,weight_stationary_inspired,0.971,0.947,1.006,5,no difference
+AlexNet,Alex_conv4,Row-stationary inspired,3.071,2.797,3.165,5,worse
+AlexNet,Alex_conv4,output_stationary_inspired,0.97,0.942,1.003,5,no difference
+AlexNet,Alex_conv4,weight_stationary_inspired,0.955,0.945,0.982,5,no difference
+AlexNet,Alex_conv5,Row-stationary inspired,2.76,2.301,2.908,5,worse
+AlexNet,Alex_conv5,output_stationary_inspired,0.98,0.973,1.07,5,no difference
+AlexNet,Alex_conv5,weight_stationary_inspired,0.964,0.935,0.978,5,no difference
+VGG16,VGG_conv1_1,Row-stationary inspired,0.994,0.983,1.087,5,no difference
+VGG16,VGG_conv1_1,output_stationary_inspired,1.83,1.827,1.844,5,worse
+VGG16,VGG_conv1_1,weight_stationary_inspired,6.674,6.358,6.835,5,worse
+VGG16,VGG_conv1_2,Row-stationary inspired,0.034,0.033,0.036,5,better
+VGG16,VGG_conv1_2,output_stationary_inspired,0.871,0.867,0.878,5,better
+VGG16,VGG_conv1_2,weight_stationary_inspired,6.517,6.493,6.532,5,worse
+VGG16,VGG_conv2_1,Row-stationary inspired,0.065,0.064,0.086,5,better
+VGG16,VGG_conv2_1,output_stationary_inspired,0.897,0.873,0.918,5,better
+VGG16,VGG_conv2_1,weight_stationary_inspired,8.206,8.157,8.247,5,worse
+VGG16,VGG_conv3_1,Row-stationary inspired,1.318,1.287,1.688,5,no difference
+VGG16,VGG_conv3_1,output_stationary_inspired,0.893,0.839,0.958,5,no difference
+VGG16,VGG_conv3_1,weight_stationary_inspired,29.6,29.542,29.696,5,worse
+VGG16,VGG_conv4_1,Row-stationary inspired,2.186,2.149,2.294,5,worse
+VGG16,VGG_conv4_1,output_stationary_inspired,0.625,0.587,1.007,5,no difference
+VGG16,VGG_conv4_1,weight_stationary_inspired,1.456,1.255,1.748,5,worse
+MobileNet,MobileNet_conv1,Row-stationary inspired,0.928,0.92,0.998,5,no difference
+MobileNet,MobileNet_conv1,output_stationary_inspired,1.732,1.703,1.736,5,worse
+MobileNet,MobileNet_conv1,weight_stationary_inspired,6.156,5.947,6.875,5,worse
+MobileNet,MobileNet_dw2,Row-stationary inspired,0.485,0.435,0.62,5,better
+MobileNet,MobileNet_dw2,output_stationary_inspired,0.746,0.581,0.826,5,no difference
+MobileNet,MobileNet_dw2,weight_stationary_inspired,13.155,13.097,13.469,5,worse
+MobileNet,MobileNet_pw2,Row-stationary inspired,0.728,0.642,0.74,5,better
+MobileNet,MobileNet_pw2,output_stationary_inspired,1.246,1.023,1.341,5,no difference
+MobileNet,MobileNet_pw2,weight_stationary_inspired,9.736,9.72,9.774,5,worse
+MobileNet,MobileNet_dw3,Row-stationary inspired,0.997,0.851,1.346,5,no difference
+MobileNet,MobileNet_dw3,output_stationary_inspired,0.995,0.792,1.868,5,no difference
+MobileNet,MobileNet_dw3,weight_stationary_inspired,16.986,16.284,17.1,5,worse
